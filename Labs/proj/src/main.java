@@ -1,3 +1,3 @@
 public class main {
-    // Test Test
+    // Wuz good
 }

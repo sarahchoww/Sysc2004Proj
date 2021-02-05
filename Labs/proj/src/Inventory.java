@@ -23,26 +23,35 @@ public class Inventory {
     private ArrayList<Product> products = new ArrayList<>();
 
 
-    public Inventory(){
 
+
+    public Inventory(){
+        stock.set(0, null);
+        products.set(0, null);
+    }
+
+    public Product getProduct(int productID){
+        return products.get(productID);
     }
 
     public void getProductInfo(int productID){
-        System.out.println("Name: " + this.products.get(productID).getName() + " Product ID: " + productID +
-                " Price: " + this.products.get(productID).getPrice());
+        System.out.println("Name: " + getProduct(productID).getName() + " Product ID: " + productID +
+                " Price: " + getProduct(productID).getPrice());
     }
 
     public int getStock(int productID){
-        return stock.get(productID); // Subtract one as productIDs start from 1
+        return stock.get(productID);
     }
 
     public void setStock(int stock, String name){
 
-        int count = 0;
+        int count = 1;
         boolean found = false;
 
-        while (count < products.size() && !found){
-            if (products.get(count).getName().equals(name)){
+        while ((count < (products.size() - 1)) && !found){
+            // Offset by 1 as comparing an offset counter by a non-offset size
+
+            if (getProduct(count).getName().equals(name)){
                 this.stock.set(count, stock); // Count is the index
                 found = true;
             }
@@ -58,11 +67,11 @@ public class Inventory {
     }
 
     public void removeStock(int stock, int productID){
-        int count = 0;
+        int count = 1;
         boolean found = false;
 
-        while (count < products.size() && !found){
-            if (products.get(count).getProductID() == productID){
+        while ((count < (products.size() - 1)) && !found){
+            if (getProduct(count).getProductID() == productID){
 
                 if ((this.stock.get(count) - stock) > 0){
                     this.stock.set(count, this.stock.get(count) - stock);

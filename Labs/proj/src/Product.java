@@ -15,5 +15,31 @@ All rights reserved.
 ====================================================*/
 
 public class Product {
-    //Beginning of Product Class
+
+    //Attributes are all final as they cannot be
+    //changed after object creation
+
+    private final String name;      //Product Name
+    private final int productID;    //Product ID
+    private final double price;     //Price of product
+
+    //Parametric constructor
+    Product(String name, int productID, double price) {
+        this.name = name;
+        this.productID = productID;
+        this.price = price;
+    }
+
+    //Accessor Methods
+    public String getName() {
+        return this.name;
+    }
+
+    public int getProductID() {
+        return this.productID;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
 }

@@ -28,12 +28,12 @@ public class Inventory {
     }
 
     public void getProductInfo(int productID){
-        System.out.println("Name: " + this.products.get(productID - 1).getName() + " Product ID: " + productID +
-                " Price: " + this.products.get(productID - 1).getPrice());
+        System.out.println("Name: " + this.products.get(productID).getName() + " Product ID: " + productID +
+                " Price: " + this.products.get(productID).getPrice());
     }
 
     public int getStock(int productID){
-        return stock.get(productID - 1); // Subtract one as productIDs start from 1
+        return stock.get(productID); // Subtract one as productIDs start from 1
     }
 
     public void setStock(int stock, String name){
@@ -51,7 +51,7 @@ public class Inventory {
     }
 
     public void setStock(int stock, String name, double price){
-        Product product = new Product(name, products.size() - 1, price);
+        Product product = new Product(name, products.size(), price);
 
         this.stock.add(stock);
         this.products.add(product);

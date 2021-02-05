@@ -14,6 +14,71 @@ Copyright © 2021 Michael Whitford & Sarah Chow.
 All rights reserved.
 ====================================================*/
 
+import java.util.ArrayList;
+
 public class Inventory {
     //Beginning of inventory class
+
+    private ArrayList<Integer> stock = new ArrayList<>();
+    private ArrayList<Product> products = new ArrayList<>();
+
+
+    public Inventory(){
+
+    }
+
+    public void getProductInfo(int productID){
+        System.out.println("Name: " + this.products.get(productID - 1).getName() + " Product ID: " + productID +
+                " Price: " + this.products.get(productID - 1).getPrice());
+    }
+
+    public int getStock(int productID){
+        return stock.get(productID - 1); // Subtract one as productIDs start from 1
+    }
+
+    public void setStock(int stock, String name){
+
+        int count = 0;
+        boolean found = false;
+
+        while (count < products.size() && !found){
+            if (products.get(count).getName().equals(name)){
+                this.stock.set(count, stock); // Count is the index
+                found = true;
+            }
+            count++;
+        }
+    }
+
+    public void setStock(int stock, String name, double price){
+        Product product = new Product(name, products.size() - 1, price);
+
+        this.stock.add(stock);
+        this.products.add(product);
+    }
+
+    public void removeStock(int stock, int productID){
+        int count = 0;
+        boolean found = false;
+
+        while (count < products.size() && !found){
+            if (products.get(count).getProductID() == productID){
+
+                if ((this.stock.get(count) - stock) > 0){
+                    this.stock.set(count, this.stock.get(count) - stock);
+                }
+                else{
+                    this.stock.set(count, 0);
+                }
+                found = true;
+            }
+            count++;
+        }
+
+        if (!found){
+            System.out.println("Item not found!");
+        }
+    }
+
+
 }

@@ -28,14 +28,14 @@ public class Product {
     }
 
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public int getProductID(){
-        return productID;
+        return this.productID;
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 }

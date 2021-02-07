@@ -22,9 +22,6 @@ public class Inventory {
     private ArrayList<Integer> stock = new ArrayList<>();
     private ArrayList<Product> products = new ArrayList<>();
 
-
-
-
     public Inventory(){
         stock.set(0, null);
         products.set(0, null);

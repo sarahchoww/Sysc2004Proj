@@ -27,15 +27,9 @@ public class Product {
         Price = price;
     }
 
-    public String getName(){
-        return Name;
-    }
+    public String getName(){ return Name; }
 
-    public int getProductID(){
-        return ProductID;
-    }
+    public int getProductID(){ return ProductID; }
 
-    public double getPrice() {
-        return Price;
-    }
+    public double getPrice() { return Price; }
 }

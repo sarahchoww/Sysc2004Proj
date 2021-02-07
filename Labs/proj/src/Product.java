@@ -17,19 +17,19 @@ All rights reserved.
 public class Product {
     //Beginning of Product Class
 
-    private final String Name;
-    private final int ProductID;
-    private final double Price;
+    private final String NAME;
+    private final int PRODUCTID;
+    private final double PRICE;
 
     public Product(String name, int productID, double price){
-        Name = name;
-        ProductID = productID;
-        Price = price;
+        NAME = name;
+        PRODUCTID = productID;
+        PRICE = price;
     }
 
-    public String getName(){ return Name; }
+    public String getName(){ return NAME; }
 
-    public int getProductID(){ return ProductID; }
+    public int getProductID(){ return PRODUCTID; }
 
-    public double getPrice() { return Price; }
+    public double getPrice() { return PRICE; }
 }

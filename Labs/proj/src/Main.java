@@ -11,6 +11,9 @@ Copyright © 2021 Michael Whitford & Sarah Chow.
 All rights reserved.
 ====================================================*/
 
-public class main {
+public class Main {
     //Start of main method
+    public static void main(String[] args){
+
+    }
 }

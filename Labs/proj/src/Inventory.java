@@ -23,10 +23,13 @@ public class Inventory {
     private ArrayList<Product> products = new ArrayList<>();
 
     public Inventory(){
+        // Setting the first index of both arraylists to null to offset
+        // the indices to match the productIDs
         stock.set(0, null);
         products.set(0, null);
     }
 
+    // Wrapper method to get the Product object from the productID
     public Product getProduct(int productID){
         return products.get(productID);
     }
@@ -40,22 +43,24 @@ public class Inventory {
         return stock.get(productID);
     }
 
+    // Function overloading - to set stock of existing product
     public void setStock(int stock, String name){
-
         int count = 1;
         boolean found = false;
 
+        // Search for the desired product
         while ((count < (products.size() - 1)) && !found){
             // Offset by 1 as comparing an offset counter by a non-offset size
 
             if (getProduct(count).getName().equals(name)){
                 this.stock.set(count, stock); // Count is the index
-                found = true;
+                found = true; // Exit loop
             }
             count++;
         }
     }
 
+    // Function overloading - to create a new product and set stock
     public void setStock(int stock, String name, double price){
         Product product = new Product(name, products.size(), price);
 
@@ -70,6 +75,7 @@ public class Inventory {
         while ((count < (products.size() - 1)) && !found){
             if (getProduct(count).getProductID() == productID){
 
+                // Check to see if product will have remaining stock
                 if ((this.stock.get(count) - stock) > 0){
                     this.stock.set(count, this.stock.get(count) - stock);
                 }

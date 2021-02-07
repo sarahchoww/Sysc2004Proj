@@ -27,27 +27,27 @@ public class StoreManager {
         return this.inventory;
     }
 
-    //Wrapper function for getStock in inventory class
+    // Wrapper function for getStock in inventory class
     public int getStock (int productID) {
         return this.inventory.getStock(productID);
     }
 
-    //Processes transaction. Returns total value of items purchased and removes
-    //them from stock. Return of -1 indicates error
+    // Processes transaction. Returns total value of items purchased and removes
+    // them from stock. Return of -1 indicates error
     public double transaction (ArrayList<Integer[]> cart) {
 
         double total = 0.0;
 
-        //Define indices of ProductID and Quantity in each sub-array of cart
+        // Define indices of ProductID and Quantity in each sub-array of cart
         final int ID_INDEX = 0;
         final int QUANTITY_INDEX = 1;
 
         for (Integer[] item : cart) {
 
-            int productID = item[ID_INDEX]; //get product ID in item array
-            int quantity = item[QUANTITY_INDEX]; //get quantity in item array
+            int productID = item[ID_INDEX]; // Get product ID in item array
+            int quantity = item[QUANTITY_INDEX]; // Get quantity in item array
 
-            //Exit if insufficient stock of the product
+            // Exit if insufficient stock of the product
             if (quantity > this.getStock(productID)) {
                 return -1.0;
             }

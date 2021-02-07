@@ -17,25 +17,25 @@ All rights reserved.
 public class Product {
     //Beginning of Product Class
 
-    private final String name;
-    private final int productID;
-    private final double price;
+    private final String Name;
+    private final int ProductID;
+    private final double Price;
 
     public Product(String name, int productID, double price){
-        this.name = name;
-        this.productID = productID;
-        this.price = price;
+        Name = name;
+        ProductID = productID;
+        Price = price;
     }
 
     public String getName(){
-        return name;
+        return Name;
     }
 
     public int getProductID(){
-        return productID;
+        return ProductID;
     }
 
     public double getPrice() {
-        return price;
+        return Price;
     }
 }

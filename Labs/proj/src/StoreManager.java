@@ -19,7 +19,7 @@ public class StoreManager {
 
     private Inventory inventory;
 
-    StoreManager() {
+    public StoreManager() {
         inventory = new Inventory();
     }
 

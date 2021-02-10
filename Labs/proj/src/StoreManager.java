@@ -41,16 +41,25 @@ public class StoreManager {
         // Define indices of ProductID and Quantity in each sub-array of cart
         final int ID_INDEX = 0;
         final int QUANTITY_INDEX = 1;
+        final double ERROR = -1.0;
 
-        for (Integer[] item : cart) {
+        int productID;
+        int quantity;
 
-            int productID = item[ID_INDEX]; // Get product ID in item array
-            int quantity = item[QUANTITY_INDEX]; // Get quantity in item array
+        for (Integer[] item : cart){
+            productID = item[ID_INDEX]; // Get product ID in item array
+            quantity = item[QUANTITY_INDEX]; // Get quantity in item array
 
             // Exit if insufficient stock of the product
             if (quantity > this.getStock(productID)) {
-                return -1.0;
+                return ERROR;
             }
+        }
+
+        for (Integer[] item : cart) {
+
+            productID = item[ID_INDEX]; // Get product ID in item array
+            quantity = item[QUANTITY_INDEX]; // Get quantity in item array
 
             total += this.inventory.getProduct(productID).getPrice() * quantity;
 

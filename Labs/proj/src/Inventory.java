@@ -25,8 +25,8 @@ public class Inventory {
     public Inventory(){
         // Setting the first index of both arraylists to null to offset
         // the indices to match the productIDs
-        stock.set(0, null);
-        products.set(0, null);
+        stock.add(0, null);
+        products.add(0, null);
     }
 
     // Wrapper method to get the Product object from the productID
@@ -40,21 +40,34 @@ public class Inventory {
     }
 
     public int getStock(int productID){
-        return stock.get(productID);
+        int stockVal;
+        final int ERROR = -1;
+
+        try{
+            stockVal = this.stock.get(productID);
+        }
+
+        catch(Exception e){
+            System.out.println("Item does not exist in stock.");
+            return ERROR;
+        }
+
+        return stockVal;
     }
 
     // Function overloading - to set stock of existing product
     public void setStock(int stock, String name){
         int count = 1;
-        boolean found = false;
+        boolean exit = false;
+
 
         // Search for the desired product
-        while ((count < (products.size() - 1)) && !found){
+        while ((count < (products.size())) && !exit){
             // Offset by 1 as comparing an offset counter by a non-offset size
 
             if (getProduct(count).getName().equals(name)){
                 this.stock.set(count, stock); // Count is the index
-                found = true; // Exit loop
+                exit = true; // Exit loop
             }
             count++;
         }
@@ -72,7 +85,8 @@ public class Inventory {
         int count = 1;
         boolean found = false;
 
-        while ((count < (products.size() - 1)) && !found){
+        while ((count < (products.size())) && !found){
+
             if (getProduct(count).getProductID() == productID){
 
                 // Check to see if product will have remaining stock

@@ -46,12 +46,10 @@ public class Inventory {
         try{
             stockVal = this.stock.get(productID);
         }
-
         catch(Exception e){
             System.out.println("Item does not exist in stock.");
             return ERROR;
         }
-
         return stockVal;
     }
 
@@ -59,7 +57,6 @@ public class Inventory {
     public void setStock(int stock, String name){
         int count = 1;
         boolean exit = false;
-
 
         // Search for the desired product
         while ((count < (products.size())) && !exit){
@@ -105,6 +102,4 @@ public class Inventory {
             System.out.println("Item not found!");
         }
     }
-
-
 }

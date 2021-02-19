@@ -1,20 +1,20 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/**===================================================
-                SYSC 2004 Winter 2021
+/**
+ *             SYSC 2004 Winter 2021
+ *
+ * @author Michael Whitford, 101151720
+ * @author Sarah Chow, Sarah Chow, 101143033
+ *
+ * SYSC 2004 Project - Milestone 2 Store View class
+ * ***************************************************ADD DOCUMENTATION
+ *
+ * Copyright © 2021 Michael Whitford & Sarah Chow.
+ * All rights reserved.
+ */
 
-Names:
-Michael Whitford, 101151720
-Sarah Chow, Sarah Chow, 101143033
-
-SYSC 2004 Project - Milestone 1 Main Method
-
-Copyright © 2021 Michael Whitford & Sarah Chow.
-All rights reserved.
-====================================================*/
-
-public class Main {
+public class StoreView {
     //Start of main method
     public static void main(String[] args){
 

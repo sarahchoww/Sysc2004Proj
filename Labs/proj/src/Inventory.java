@@ -53,28 +53,27 @@ public class Inventory {
     }
 
     // Function overloading - to set stock of existing product
-    public void setStock(int stock, String name){
-        int count = 1;
-        boolean exit = false;
+    public void setStock(int stock, int productID){
 
-        // Search for the desired product
-        while ((count < (products.size())) && !exit){
-            // Offset by 1 as comparing an offset counter by a non-offset size
+        int newStock = this.getStock(productID) + stock;
 
-            if (getProduct(count).getName().equals(name)){
-                this.stock.set(count, stock); // Count is the index
-                exit = true; // Exit loop
-            }
-            count++;
-        }
+        this.stock.set(productID, newStock);
+
     }
 
     // Function overloading - to create a new product and set stock
-    public void setStock(int stock, String name, double price){
-        Product product = new Product(name, products.size(), price);
+    public void setStock(int stock, String name, int productID, double price){
+        if (this.stock.size() > productID){
+            setStock(stock, productID);
+            System.out.println("hello");
+        }
+        else{
+            Product product = new Product(name, productID, price);
 
-        this.stock.add(stock);
-        this.products.add(product);
+            this.stock.add(stock);
+            this.products.add(product);
+        }
+
     }
 
     public void removeStock(int stock, int productID){

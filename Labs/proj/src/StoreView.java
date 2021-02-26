@@ -23,8 +23,9 @@ public class StoreView {
         StoreManager s1 = new StoreManager();
 
 
-        s1.getInventory().setStock(3, p1.getName(), p1.getPrice());
-        s1.getInventory().setStock(3, p2.getName(), p2.getPrice());
+        s1.getInventory().setStock(3, p1.getName(), p1.getProductID(), p1.getPrice());
+        s1.getInventory().setStock(5, p1.getName(), p1.getProductID(), p1.getPrice());
+        s1.getInventory().setStock(3, p2.getName(),p2.getProductID(), p2.getPrice());
 
         System.out.println(s1.getStock(p1.getProductID()));
         System.out.println(s1.getStock(p2.getProductID()));

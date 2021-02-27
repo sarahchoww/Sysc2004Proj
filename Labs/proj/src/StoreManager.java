@@ -1,17 +1,16 @@
-/*===================================================
-                SYSC 2004 Winter 2021
-
-Names:
-Michael Whitford, 101151720
-Sarah Chow, 101143033
-
-SYSC 2004 Project - Milestone 1 StoreManager Class
-
-Used to manage the inventory class
-
-Copyright © 2021 Michael Whitford & Sarah Chow.
-All rights reserved.
-====================================================*/
+/**
+ *              SYSC 2004 Winter 2021
+ *
+ * @author Michael Whitford, 101151720
+ * @author Sarah Chow, 101143033
+ *
+ * SYSC 2004 Project - Milestone 2 Store Manager Class
+ *
+ * Used to manage the inventory class
+ *
+ * Copyright © 2021 Michael Whitford & Sarah Chow.
+ * All rights reserved.
+ */
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class StoreManager {
 
     private Inventory inventory;
 
-    StoreManager() {
+    public StoreManager() {
         inventory = new Inventory();
     }
 
@@ -27,30 +26,39 @@ public class StoreManager {
         return this.inventory;
     }
 
-    //Wrapper function for getStock in inventory class
+    // Wrapper function for getStock in inventory class
     public int getStock (int productID) {
         return this.inventory.getStock(productID);
     }
 
-    //Processes transaction. Returns total value of items purchased and removes
-    //them from stock. Return of -1 indicates error
+    // Processes transaction. Returns total value of items purchased and removes
+    // them from stock. Return of -1 indicates error
     public double transaction (ArrayList<Integer[]> cart) {
 
         double total = 0.0;
 
-        //Define indices of ProductID and Quantity in each sub-array of cart
+        // Define indices of ProductID and Quantity in each sub-array of cart
         final int ID_INDEX = 0;
         final int QUANTITY_INDEX = 1;
+        final double ERROR = -1.0;
+
+        int productID;
+        int quantity;
+
+        for (Integer[] item : cart){
+            productID = item[ID_INDEX]; // Get product ID in item array
+            quantity = item[QUANTITY_INDEX]; // Get quantity in item array
+
+            // Exit if insufficient stock of the product
+            if (quantity > this.getStock(productID)) {
+                return ERROR;
+            }
+        }
 
         for (Integer[] item : cart) {
 
-            int productID = item[ID_INDEX]; //get product ID in item array
-            int quantity = item[QUANTITY_INDEX]; //get quantity in item array
-
-            //Exit if insufficient stock of the product
-            if (quantity > this.getStock(productID)) {
-                return -1.0;
-            }
+            productID = item[ID_INDEX]; // Get product ID in item array
+            quantity = item[QUANTITY_INDEX]; // Get quantity in item array
 
             total += this.inventory.getProduct(productID).getPrice() * quantity;
 

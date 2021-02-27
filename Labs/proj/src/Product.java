@@ -2,7 +2,8 @@
  *              SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
- * @author Sarah Chow, Sarah Chow, 101143033
+ * @author Sarah Chow, 101143033
+ * @version 2.0
  *
  * SYSC 2004 Project - Milestone 2 Product Class
  *
@@ -13,22 +14,47 @@
  * All rights reserved.
  */
 
+/**
+ * A Product class. Contains the info for each product sold in the store
+ */
+
 public class Product {
-    //Beginning of Product Class
 
     private final String NAME;
     private final int PRODUCTID;
     private final double PRICE;
 
+    /**
+     * Parametric constructor for a Product.
+     *
+     * @param name          String, product name
+     * @param productID     int, productID
+     * @param price         double, product price
+     */
     public Product(String name, int productID, double price){
         NAME = name;
         PRODUCTID = productID;
         PRICE = price;
     }
 
-    public String getName(){ return NAME; }
+    /**
+     * Accessor method for product's name
+     *
+     * @return NAME      String, product's name
+     */
+    public String getName(){ return this.NAME; }
 
-    public int getProductID(){ return PRODUCTID; }
+    /**
+     * Accessor method for product's ID
+     *
+     * @return  PRODUCTID     int, product's ID
+     */
+    public int getProductID(){ return this.PRODUCTID; }
 
-    public double getPrice() { return PRICE; }
+    /**
+     * Accessor method for product's price
+     *
+     * @return PRICE      double, product's price
+     */
+    public double getPrice() { return this.PRICE; }
 }

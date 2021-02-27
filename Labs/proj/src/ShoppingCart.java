@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-
 /**
  *                 SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
- * @author Sarah Chow, Sarah Chow, 101143033
+ * @author Sarah Chow, 101143033
+ * @version 1.0
  *
  * SYSC 2004 Project - Milestone 2 Shopping Cart Class
  *
@@ -13,6 +12,8 @@ import java.util.ArrayList;
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */
+
+import java.util.ArrayList;
 
 public class ShoppingCart {
 

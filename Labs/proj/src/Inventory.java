@@ -2,7 +2,8 @@
  *              SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
- * @author Sarah Chow, Sarah Chow, 101143033
+ * @author Sarah Chow, 101143033
+ * @version 2.0
  *
  * SYSC 2004 Project - Milestone 2 Inventory Class
  *

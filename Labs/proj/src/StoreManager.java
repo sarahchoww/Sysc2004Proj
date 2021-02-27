@@ -21,21 +21,39 @@ public class StoreManager {
 
     private Inventory inventory;
 
+    /**
+     * Default constructor for Store Manager
+     */
     public StoreManager() {
         inventory = new Inventory();
     }
 
+    /**
+     * Accessor for inventory attribute
+     *
+     * @return inventory     Inventory, inventory attribute for this class
+     */
     public Inventory getInventory() {
         return this.inventory;
     }
 
-    // Wrapper function for getStock in inventory class
+    /**
+     * Wrapper function for getStock in inventory class
+     *
+     * @param productID     int, productID of specific product
+     * @return int          quantity of stock of specific product
+     */
     public int getStock (int productID) {
         return this.inventory.getStock(productID);
     }
 
-    // Processes transaction. Returns total value of items purchased and removes
-    // them from stock. Return of -1 indicates error
+    /**
+     * Processes transaction. Returns total value of items purchased and removes
+     * them from stock. Return of -1 indicates error
+     *
+     * @param cart     ArrayList<Integer[]>, list of quantity of each item and their IDs
+     * @return total    double, total value of items purchased
+     */
     public double transaction (ArrayList<Integer[]> cart) {
 
         double total = 0.0;

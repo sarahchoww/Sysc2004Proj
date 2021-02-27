@@ -1,21 +1,29 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 /**
  *             SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
- * @author Sarah Chow, Sarah Chow, 101143033
+ * @author Sarah Chow, 101143033
+ * @version 1.0
  *
  * SYSC 2004 Project - Milestone 2 Store View class
- * ***************************************************ADD DOCUMENTATION
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+/**
+ * Store View Class. Contains UI
+ */
 public class StoreView {
-    //Start of main method
+
+    /**
+     * Main method
+     *
+     * @param args      String[], Command line arguments
+     */
     public static void main(String[] args){
 
         Product p1 = new Product("cheese", 1, 2.99);

@@ -3,16 +3,19 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
+ * @version 2.0
  *
  * SYSC 2004 Project - Milestone 2 Store Manager Class
- *
- * Used to manage the inventory class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */
 
 import java.util.ArrayList;
+
+/**
+ * Store Manager Class. Used to manage the inventory class.
+ */
 
 public class StoreManager {
 

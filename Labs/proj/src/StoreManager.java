@@ -20,12 +20,14 @@ import java.util.ArrayList;
 public class StoreManager {
 
     private Inventory inventory;
+    private ArrayList<Integer> cartID = new ArrayList<>();
 
     /**
      * Default constructor for Store Manager
      */
     public StoreManager() {
-        inventory = new Inventory();
+        this.inventory = new Inventory();
+        this.cartID.add(0, null);
     }
 
     /**
@@ -45,6 +47,15 @@ public class StoreManager {
      */
     public int getStock (int productID) {
         return this.inventory.getStock(productID);
+    }
+
+    /**
+     * Accessor for cartID array
+     *
+     * @return cartID  ArrayList<Integer>, cartID attribute
+     */
+    public ArrayList<Integer> getCartID() {
+        return this.cartID;
     }
 
     /**
@@ -87,6 +98,17 @@ public class StoreManager {
         }
 
         return total;
+    }
+
+    /**
+     * Assigns new cart ID when new StoreView object is created. ID matches
+     * location in cartID arraylist
+     *
+     * @return int    returns the new assigned cartID
+     */
+    public int assignNewCartID() {
+        this.cartID.add(this.cartID.size());
+        return this.cartID.get((this.cartID.size()-1));
     }
 
 }

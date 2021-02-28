@@ -34,6 +34,14 @@ public class Inventory {
         return products.get(productID);
     }
 
+    public ArrayList<Product> getProducts() {
+        return this.products;
+    }
+
+    public ArrayList<Integer> getStock() {
+        return this.stock;
+    }
+
     public void getProductInfo(int productID){
         System.out.println("Name: " + getProduct(productID).getName() + " Product ID: " + productID +
                 " Price: " + getProduct(productID).getPrice());

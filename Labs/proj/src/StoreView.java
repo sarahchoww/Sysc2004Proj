@@ -104,21 +104,56 @@ public class StoreView {
      */
     private void printMenu(String command) {
 
+        boolean addToCart = false;
+
         System.out.println();
         System.out.println(command.toUpperCase());
         System.out.println("|---------THE MUSIC STORE---------|");
         System.out.println("Stock | Product Name | Unit Price");
 
+        if (command.equals("ADDTOCART")){
+            addToCart = true;
+        }
+        System.out.println(command + " ADDTOCART " + addToCart);
+
         ArrayList<Product> products = this.storeManager.getInventory().getProducts();
 
         for (int i = 1; i < products.size(); i++) {
             if(this.storeManager.getStock(products.get(i).getProductID()) > 0) {
-                System.out.printf("%5s %14s %12s%n", this.storeManager.getStock(products.get(i).getProductID()),
+                System.out.printf("%5s %14s %12s ", this.storeManager.getStock(products.get(i).getProductID()),
                         products.get(i).getName(), products.get(i).getPrice());
+
+
+                if (addToCart){
+
+                    System.out.printf(" (%x)%n", i - 1);
+                }
+                else{
+                    System.out.printf("%n");
+                }
+
             }
         }
 
         System.out.println();
+    }
+
+    private static void addToCart(){
+
+    }
+
+    private static void storeFunctions(String choiceString){
+
+        if (choiceString == "ADDTOCART"){
+            addToCart();
+        }
+        else if (choiceString == "CHECKOUT"){
+
+        }
+        else { // REMOVEFROMCART
+
+        }
+
     }
 
     /**
@@ -217,6 +252,9 @@ public class StoreView {
                     if (!choiceString.equals("QUIT") && !choiceString.equals("VIEWCART")) {
                         users.get(choice).printMenu(choiceString);
                         //TODO: implement actual cart functionality
+
+                        //storeFunctions(choiceString);
+
                         System.out.print("GO TO ANOTHER STOREVIEW? (y/n/q) >>> ");
                         choiceString = sc.next().toUpperCase();
                     }

@@ -87,9 +87,8 @@ public class Inventory {
 
     public void removeStock(int stock, int productID){
         int count = 1;
-        boolean found = false;
 
-        while ((count < (products.size())) && !found){
+        while (count < (products.size())){
 
             if (getProduct(count).getProductID() == productID){
 
@@ -100,13 +99,8 @@ public class Inventory {
                 else{
                     this.stock.set(count, 0);
                 }
-                found = true;
             }
             count++;
-        }
-
-        if (!found){
-            System.out.println("Item not found!");
         }
     }
 }

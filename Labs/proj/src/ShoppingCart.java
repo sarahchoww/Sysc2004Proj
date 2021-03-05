@@ -20,41 +20,56 @@ public class ShoppingCart {
     private int cartID;
     private boolean inUse;
 
-    // "Upon request, the StoreManager should return a new, unique cartID. This means StoreManager should
-    // be keeping track of cartIDs in some way"
-    // StoreManager should have the inUse variable?
+
+    // [productID, quantity]
+
+    private ArrayList<Integer[]> itemsInCart = new ArrayList<>();
 
 
 
-    private ArrayList<Integer[]> cart = new ArrayList<>();
-
-    private Inventory inventory;
-
-
-    public void addProduct(int productID, int quantity){
-
-        // Need to have the inventory as static
-        // Shopping Cart will be hosted by different instances of store manager and we need all the
-        // Inventories to be synced
-
-        inventory.removeStock(quantity, productID);
-
+    public ShoppingCart(int cartID){
+        this.inUse = true;
+        this.cartID = cartID;
+        this.itemsInCart.add(0, null);
     }
 
-    public void removeProduct(int productID, int quantity){
+    public ArrayList<Integer[]> getItemsInCart(){
+        return this.itemsInCart;
+    }
 
-        inventory.setStock(quantity, productID);
 
+    public boolean addProduct(int productID){
+
+        for (int i  = 1; i < itemsInCart.size(); i++){
+            if (itemsInCart.get(i)[0] == productID){
+                itemsInCart.get(i)[1] ++; // If product is already added to cart, increment quantity
+                return true;
+            }
+        }
+
+        Integer[] newItem = {productID, 1};
+        itemsInCart.add(newItem); // If product does not exist in cart
+
+        return true;
+    }
+
+    public boolean removeProduct(int productID){
+        for (int i  = 1; i < itemsInCart.size(); i++){
+            if (itemsInCart.get(i)[0] == productID){
+                itemsInCart.get(i)[1] --; // If product is already added to cart, increment quantity
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void setCartID(int cartID){
         this.cartID = cartID;
-
     }
 
     public ArrayList<Integer[]> getReceipt(){
-        return cart;
+        return itemsInCart;
     }
-
 
 }

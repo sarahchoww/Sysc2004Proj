@@ -76,7 +76,7 @@ public class StoreView {
         System.out.println("Checkout: Completes purchase and prints receipt");
         System.out.println("RemoveFromCart: Allows you to remove items to your cart");
         System.out.println("ViewCart: Allows you to view the items in your cart");
-        System.out.println("Quit: Completely exits program");
+        System.out.println("Q: Completely exits program");
         System.out.println();
     }
 
@@ -109,12 +109,15 @@ public class StoreView {
         System.out.println();
         System.out.println(command.toUpperCase());
         System.out.println("|---------THE MUSIC STORE---------|");
-        System.out.println("Stock | Product Name | Unit Price");
+        System.out.print("Stock | Product Name | Unit Price");
 
         if (command.equals("ADDTOCART")){
             addToCart = true;
+
+            System.out.print(" | Options");
+
         }
-        System.out.println(command + " ADDTOCART " + addToCart);
+        System.out.println();
 
         ArrayList<Product> products = this.storeManager.getInventory().getProducts();
 
@@ -126,7 +129,7 @@ public class StoreView {
 
                 if (addToCart){
 
-                    System.out.printf(" (%x)%n", i - 1);
+                    System.out.printf("%8x)%n", i);
                 }
                 else{
                     System.out.printf("%n");
@@ -138,22 +141,122 @@ public class StoreView {
         System.out.println();
     }
 
-    private static void addToCart(){
+    private boolean viewCart(ShoppingCart cart, String command){
+        if (cart.getItemsInCart().size() == 1){ // Empty cart
+            System.out.println("No items in cart!");
+            return false;
+        }
+
+        boolean removeFromCart = false;
+        ArrayList<Integer[]> items = cart.getItemsInCart();
+
+        System.out.println("|---------SHOPPING CART---------|");
+        System.out.print("Quantity | Product Name | Unit Price");
+
+
+
+        if (command.equals("REMOVEFROMCART")){
+            removeFromCart = true;
+            System.out.print(" | Options");
+
+        }
+        System.out.println();
+
+        for (int i = 1; i < cart.getItemsInCart().size(); i++){
+
+            if (items.get(i)[1] > 0) {
+                System.out.printf("%8s %14s %12s ", items.get(i)[1],
+                        storeManager.getInventory().getProduct(items.get(i)[0]).getName(),
+                        storeManager.getInventory().getProduct(items.get(i)[0]).getPrice());
+
+
+                if (removeFromCart){
+
+                    System.out.printf("%8x)%n", i);
+                }
+                else{
+                    System.out.printf("%n");
+                }
+            }
+
+        }
+
+        System.out.println();
+
+        return true;
+    }
+
+    private void addToCart(ShoppingCart cart, int productID){
+        storeManager.addToCart(cart, productID);
+        this.viewCart(cart, "ADDTOCART");
 
     }
 
-    private static void storeFunctions(String choiceString){
+    private void removeFromCart(ShoppingCart cart, int productID){
+        storeManager.removeFromCart(cart, productID);
+        this.viewCart(cart, "REMOVEFROMCART");
+    }
 
-        if (choiceString == "ADDTOCART"){
-            addToCart();
+    private void checkout(ShoppingCart cart){
+        storeManager.checkout(cart);
+    }
+
+    private void storeFunctions(String choiceString, ShoppingCart cart){
+
+        switch(choiceString){
+            case ("ADDTOCART"):
+
+                boolean validOption1 = false;
+
+                while(!validOption1){
+                    System.out.print("Option: ");
+                    Scanner sc1 = new Scanner(System.in);
+                    int option1 = sc1.nextInt();
+
+                    if ((option1 < this.storeManager.getInventory().getProducts().size()) && (option1 > 0)) {
+                        addToCart(cart, option1);
+                        validOption1 = true;
+                    }
+                    else{
+                        System.out.println("MAIN > ERROR > INVALID OPTION");
+                    }
+                }
+
+                break;
+
+            case("REMOVEFROMCART"):
+
+                if (this.viewCart(cart, choiceString)){
+                    boolean validOption2 = false;
+                    System.out.print("Option: ");
+                    Scanner sc2 = new Scanner(System.in);
+                    int option2 = sc2.nextInt();
+
+                    while(!validOption2){
+                        if ((option2 < cart.getItemsInCart().size()) && (option2 > 0)) {
+                            removeFromCart(cart, option2);
+                            validOption2 = true;
+                        }
+                        else{
+                            System.out.println("MAIN > ERROR > INVALID OPTION");
+                        }
+                    }
+                }
+
+                break;
+
+            case("CHECKOUT"):
+                this.viewCart(cart, choiceString);
+                this.checkout(cart);
+                break;
+            default:
+                break;
         }
-        else if (choiceString == "CHECKOUT"){
 
-        }
-        else { // REMOVEFROMCART
+    }
 
-        }
-
+    public void setStoreManager(StoreManager sm){
+        this.storeManager = sm;
     }
 
     /**
@@ -166,6 +269,8 @@ public class StoreView {
 
         StoreManager sm = new StoreManager();
 
+
+
         //Initialize products
         sm.getInventory().getProducts().add(new Product("Guitar", 1, 999.99));
         sm.getInventory().getStock().add(10);
@@ -176,17 +281,27 @@ public class StoreView {
         sm.getInventory().getProducts().add(new Product("Saxophone", 4, 799.99));
         sm.getInventory().getStock().add(10);
 
+
         //First user
         StoreView sv1 = new StoreView(sm, sm.assignNewCartID());
 
-        ArrayList<StoreView> users = new ArrayList<>();
+        sv1.setStoreManager(sm);
+
+        ArrayList<StoreView> users = new ArrayList<>(); // ArrayList of storeviews
         users.add(null); //first element is null so there's no offset
         users.add(sv1);
 
+        ArrayList<ShoppingCart> shoppingCart = new ArrayList<>();
+        shoppingCart.add(null); //first element is null so there's no offset
+        shoppingCart.add(new ShoppingCart(sv1.cartID));
+
+
         ArrayList<String> validCommands = new ArrayList<>(Arrays.asList("HELP", "ADDTOCART", "BROWSE",
-                "CHECKOUT", "REMOVEFROMCART", "VIEWCART", "QUIT"));
+                "CHECKOUT", "REMOVEFROMCART", "VIEWCART", "Q"));
 
         String choiceString = ""; //used to get user input
+        boolean valid = false; // For user error checking
+
 
         while (StoreView.activeUsers(users) && !choiceString.equals("Q")) {
             StoreView.printUsers(users);
@@ -201,11 +316,22 @@ public class StoreView {
             if (!sm.getCartID().contains(choice) && choice > 0) {
                 System.out.println();
                 System.out.println("THAT STOREVIEW DOES NOT CURRENTLY EXIST");
-                System.out.print("ADD A NEW STOREVIEW? (y/n) >>> ");
-                choiceString = sc.next().toUpperCase();
+
+                while (!valid){
+                    System.out.print("ADD A NEW STOREVIEW? (y/n) >>> ");
+                    choiceString = sc.next().toUpperCase();
+
+                    if (choiceString.equals("Y") || choiceString.equals("N")){
+                        valid = true;
+                    }
+                }
+
 
                 if(choiceString.equals("Y")) {
-                    users.add(new StoreView(sm, sm.assignNewCartID()));
+                    StoreView newUser = new StoreView(sm, sm.assignNewCartID());
+                    users.add(newUser);
+                    shoppingCart.add(new ShoppingCart(newUser.cartID));
+
                     choiceValid = true;
                 }
             }
@@ -225,10 +351,11 @@ public class StoreView {
 
             System.out.println();
 
+            valid = false;
             choiceString = "";
             if (choiceValid) {
                 System.out.println("CART >>> " + users.get(choice).cartID);
-                while (!choiceString.equals("Y") && !choiceString.equals("Q")) {
+                while (!choiceString.equals("Y") && !choiceString.equals("Q") && StoreView.activeUsers(users)) {
 
                     boolean validCommand = false;
 
@@ -249,27 +376,53 @@ public class StoreView {
                         }
                     }
 
-                    if (!choiceString.equals("QUIT") && !choiceString.equals("VIEWCART")) {
-                        users.get(choice).printMenu(choiceString);
-                        //TODO: implement actual cart functionality
+                    if (!choiceString.equals("Q") && !choiceString.equals("VIEWCART")) {
 
-                        //storeFunctions(choiceString);
+                        if (!choiceString.equals("REMOVEFROMCART") && !choiceString.equals("CHECKOUT")){
+                            users.get(choice).printMenu(choiceString);
+                        }
 
-                        System.out.print("GO TO ANOTHER STOREVIEW? (y/n/q) >>> ");
-                        choiceString = sc.next().toUpperCase();
+                        users.get(choice).storeFunctions(choiceString, shoppingCart.get(choice));
+
+                        if (choiceString.equals("CHECKOUT")){
+                            users.set(choice, null);
+                            valid = true;
+                        }
+
+                        while (!valid){
+                            System.out.print("GO TO ANOTHER STOREVIEW? (y/n/q) >>> ");
+                            choiceString = sc.next().toUpperCase();
+
+                            if (choiceString.equals("Y") || choiceString.equals("N") || choiceString.equals("Q")) {
+                                valid = true;
+                            }
+                        }
+
+                        if (StoreView.activeUsers(users)){
+                            valid = false;
+                        }
+
+
                     }
                     else if (choiceString.equals("VIEWCART")) {
-                        //TODO: print cart screen
+                        users.get(choice).viewCart(shoppingCart.get(choice), choiceString);
                     }
 
-                    if (choiceString.equals("QUIT")) {
-                        choiceString = "Q";
-                    }
                 }
 
-                if(!choiceString.equals("Q")) {
-                    System.out.print("DEACTIVATE PREVIOUS USER? (y/n) >>> ");
-                    choiceString = sc.next().toUpperCase();
+
+                valid = false;
+                if(!choiceString.equals("Q") && StoreView.activeUsers(users)) {
+
+                    while (!valid){
+                        System.out.print("DEACTIVATE PREVIOUS USER? (y/n) >>> ");
+                        choiceString = sc.next().toUpperCase();
+
+                        if (choiceString.equals("Y") || choiceString.equals("N")){
+                            valid = true;
+                        }
+                    }
+
 
                     if (choiceString.equals("Y")) {
                         users.set(choice, null);

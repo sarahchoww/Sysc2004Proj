@@ -11,6 +11,7 @@
  * All rights reserved.
  */
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -58,6 +59,18 @@ public class StoreManager {
         return this.cartID;
     }
 
+    public void addToCart(ShoppingCart cart, int productID){
+        if(cart.addProduct(productID)){
+            inventory.removeStock(1, productID);
+        }
+    }
+
+    public void removeFromCart(ShoppingCart cart, int productID){
+        if (cart.removeProduct(productID)){
+            inventory.setStock(1, productID);
+        }
+    }
+
     /**
      * Processes transaction. Returns total value of items purchased and removes
      * them from stock. Return of -1 indicates error
@@ -65,39 +78,39 @@ public class StoreManager {
      * @param cart     ArrayList<Integer[]>, list of quantity of each item and their IDs
      * @return total    double, total value of items purchased
      */
-    public double transaction (ArrayList<Integer[]> cart) {
+    public void checkout (ShoppingCart cart) {
+
+        ArrayList<Integer[]> items = cart.getItemsInCart();
 
         double total = 0.0;
 
         // Define indices of ProductID and Quantity in each sub-array of cart
         final int ID_INDEX = 0;
         final int QUANTITY_INDEX = 1;
-        final double ERROR = -1.0;
 
         int productID;
         int quantity;
 
-        for (Integer[] item : cart){
-            productID = item[ID_INDEX]; // Get product ID in item array
-            quantity = item[QUANTITY_INDEX]; // Get quantity in item array
+        System.out.println("|-------------RECEIPT-------------|");
+        System.out.println("Quantity | Product Name |    PRICE");
 
-            // Exit if insufficient stock of the product
-            if (quantity > this.getStock(productID)) {
-                return ERROR;
-            }
-        }
 
-        for (Integer[] item : cart) {
+        for (int i = 1; i < items.size(); i++){
+            productID = items.get(i)[ID_INDEX]; // Get product ID in item array
+            quantity = items.get(i)[QUANTITY_INDEX]; // Get quantity in item array
 
-            productID = item[ID_INDEX]; // Get product ID in item array
-            quantity = item[QUANTITY_INDEX]; // Get quantity in item array
+
+            System.out.printf("%8s %14s %10s%n", items.get(i)[QUANTITY_INDEX],
+                    getInventory().getProduct(items.get(i)[ID_INDEX]).getName(),
+                    (getInventory().getProduct(items.get(i)[ID_INDEX]).getPrice()) * (items.get(i)[QUANTITY_INDEX]));
 
             total += this.inventory.getProduct(productID).getPrice() * quantity;
 
-            this.inventory.removeStock(quantity, productID);
         }
+        System.out.println("-----------------------------------");
 
-        return total;
+        System.out.printf("Total: $%.2f%n%n", total);
+
     }
 
     /**

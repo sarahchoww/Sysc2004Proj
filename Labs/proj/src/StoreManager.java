@@ -11,7 +11,7 @@
  * All rights reserved.
  */
 
-import javax.swing.*;
+
 import java.util.ArrayList;
 
 /**
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class StoreManager {
 
-    private Inventory inventory;
+    private static Inventory inventory;
     private ArrayList<Integer> cartID = new ArrayList<>();
 
     /**
@@ -99,13 +99,13 @@ public class StoreManager {
             productID = items.get(i)[ID_INDEX]; // Get product ID in item array
             quantity = items.get(i)[QUANTITY_INDEX]; // Get quantity in item array
 
+            if (quantity > 0){
+                System.out.printf("%8s %14s %10s%n", items.get(i)[QUANTITY_INDEX],
+                        getInventory().getProduct(items.get(i)[ID_INDEX]).getName(),
+                        (getInventory().getProduct(items.get(i)[ID_INDEX]).getPrice()) * (items.get(i)[QUANTITY_INDEX]));
 
-            System.out.printf("%8s %14s %10s%n", items.get(i)[QUANTITY_INDEX],
-                    getInventory().getProduct(items.get(i)[ID_INDEX]).getName(),
-                    (getInventory().getProduct(items.get(i)[ID_INDEX]).getPrice()) * (items.get(i)[QUANTITY_INDEX]));
-
-            total += this.inventory.getProduct(productID).getPrice() * quantity;
-
+                total += this.inventory.getProduct(productID).getPrice() * quantity;
+            }
         }
         System.out.println("-----------------------------------");
 

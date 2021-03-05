@@ -13,6 +13,7 @@
  * All rights reserved.
  */
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 
 public class ShoppingCart {
@@ -54,9 +55,11 @@ public class ShoppingCart {
     }
 
     public boolean removeProduct(int productID){
+
         for (int i  = 1; i < itemsInCart.size(); i++){
             if (itemsInCart.get(i)[0] == productID){
                 itemsInCart.get(i)[1] --; // If product is already added to cart, increment quantity
+
                 return true;
             }
         }

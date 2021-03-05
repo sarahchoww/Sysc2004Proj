@@ -129,7 +129,7 @@ public class StoreView {
 
                 if (addToCart){
 
-                    System.out.printf("%8x)%n", i);
+                    System.out.printf("%8x)%n", storeManager.getInventory().getProducts().get(i).getProductID());
                 }
                 else{
                     System.out.printf("%n");
@@ -169,10 +169,11 @@ public class StoreView {
                         storeManager.getInventory().getProduct(items.get(i)[0]).getName(),
                         storeManager.getInventory().getProduct(items.get(i)[0]).getPrice());
 
+                //System.out.println("TEST: " + cart.getItemsInCart().get(i)[0])
 
                 if (removeFromCart){
 
-                    System.out.printf("%8x)%n", i);
+                    System.out.printf("%8x)%n", cart.getItemsInCart().get(i)[0]);
                 }
                 else{
                     System.out.printf("%n");
@@ -227,17 +228,23 @@ public class StoreView {
             case("REMOVEFROMCART"):
 
                 if (this.viewCart(cart, choiceString)){
-                    boolean validOption2 = false;
-                    System.out.print("Option: ");
-                    Scanner sc2 = new Scanner(System.in);
-                    int option2 = sc2.nextInt();
+                    boolean inCart = false;
 
-                    while(!validOption2){
-                        if ((option2 < cart.getItemsInCart().size()) && (option2 > 0)) {
-                            removeFromCart(cart, option2);
-                            validOption2 = true;
+                    while(!inCart){
+
+                        System.out.print("Option: ");
+                        Scanner sc2 = new Scanner(System.in);
+                        int option2 = sc2.nextInt();
+
+                        for(int i = 1; i < cart.getItemsInCart().size(); i++){
+                            if ((cart.getItemsInCart().get(i)[0]) == option2){
+                                removeFromCart(cart, option2);
+                                inCart = true;
+                                break;
+                            }
                         }
-                        else{
+
+                        if (!inCart){
                             System.out.println("MAIN > ERROR > INVALID OPTION");
                         }
                     }
@@ -300,10 +307,11 @@ public class StoreView {
                 "CHECKOUT", "REMOVEFROMCART", "VIEWCART", "Q"));
 
         String choiceString = ""; //used to get user input
-        boolean valid = false; // For user error checking
+
 
 
         while (StoreView.activeUsers(users) && !choiceString.equals("Q")) {
+            boolean valid = false; // For user error checking
             StoreView.printUsers(users);
 
             System.out.print("CHOOSE YOUR STOREVIEW >>> ");
@@ -355,7 +363,8 @@ public class StoreView {
             choiceString = "";
             if (choiceValid) {
                 System.out.println("CART >>> " + users.get(choice).cartID);
-                while (!choiceString.equals("Y") && !choiceString.equals("Q") && StoreView.activeUsers(users)) {
+                while (!choiceString.equals("Y") && !choiceString.equals("Q") && StoreView.activeUsers(users) &&
+                !choiceString.equals("CHECKOUT")) {
 
                     boolean validCommand = false;
 
@@ -412,10 +421,10 @@ public class StoreView {
 
 
                 valid = false;
-                if(!choiceString.equals("Q") && StoreView.activeUsers(users)) {
+                if(!choiceString.equals("Q") && StoreView.activeUsers(users) && !choiceString.equals("CHECKOUT")) {
 
                     while (!valid){
-                        System.out.print("DEACTIVATE PREVIOUS USER? (y/n) >>> ");
+                        System.out.print("DEACTIVATE PREVIOUS USER? (y/n) >>> "); // TODO: choose a nonsequential storeview to add, CRASHES, if user is deactivated, replace the items in cart
                         choiceString = sc.next().toUpperCase();
 
                         if (choiceString.equals("Y") || choiceString.equals("N")){

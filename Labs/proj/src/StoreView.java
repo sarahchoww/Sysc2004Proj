@@ -93,7 +93,6 @@ public class StoreView {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -141,6 +140,13 @@ public class StoreView {
         System.out.println();
     }
 
+    /**
+     * This method displays the current items in the cart. It shows the quantity, product name, and unit price
+     * of the item.
+     * @param cart represents the shopping cart object of the user, Cart
+     * @param command represents the command the user requests, String
+     * @return a boolean value representing whether the operation was successful, boolean
+     */
     private boolean viewCart(ShoppingCart cart, String command){
         if (cart.getItemsInCart().size() == 1){ // Empty cart
             System.out.println("No items in cart!");
@@ -152,7 +158,6 @@ public class StoreView {
 
         System.out.println("|---------SHOPPING CART---------|");
         System.out.print("Quantity | Product Name | Unit Price");
-
 
 
         if (command.equals("REMOVEFROMCART")){
@@ -169,8 +174,6 @@ public class StoreView {
                         storeManager.getInventory().getProduct(items.get(i)[0]).getName(),
                         storeManager.getInventory().getProduct(items.get(i)[0]).getPrice());
 
-                //System.out.println("TEST: " + cart.getItemsInCart().get(i)[0])
-
                 if (removeFromCart){
 
                     System.out.printf("%8x)%n", cart.getItemsInCart().get(i)[0]);
@@ -179,7 +182,6 @@ public class StoreView {
                     System.out.printf("%n");
                 }
             }
-
         }
 
         System.out.println();
@@ -187,21 +189,44 @@ public class StoreView {
         return true;
     }
 
+    /**
+     * This method adds an item to the user's shopping cart.
+     * @param cart represents the user's shopping cart, Cart
+     * @param productID represents the productID of the product to be added, int
+     */
     private void addToCart(ShoppingCart cart, int productID){
         storeManager.addToCart(cart, productID);
         this.viewCart(cart, "ADDTOCART");
 
     }
 
-    private void removeFromCart(ShoppingCart cart, int productID){
+    /**
+     * This method removes an item from the user's shopping cart.
+     * @param cart represents the user's shopping cart, Cart
+     * @param productID represents the productID of the product to be added, int
+     * @param emptyCart represents whether the user is emptying the entire cart, boolean
+     */
+    private void removeFromCart(ShoppingCart cart, int productID, boolean emptyCart){
         storeManager.removeFromCart(cart, productID);
-        this.viewCart(cart, "REMOVEFROMCART");
+        if (!emptyCart){
+            this.viewCart(cart, "REMOVEFROMCART");
+        }
+
     }
 
+    /**
+     * This methods calls on the StoreManager's checkout method. It checks out the products in the cart.
+     * @param cart represents the user's cart, Cart
+     */
     private void checkout(ShoppingCart cart){
         storeManager.checkout(cart);
     }
 
+    /**
+     * This method
+     * @param choiceString
+     * @param cart
+     */
     private void storeFunctions(String choiceString, ShoppingCart cart){
 
         switch(choiceString){
@@ -214,7 +239,9 @@ public class StoreView {
                     Scanner sc1 = new Scanner(System.in);
                     int option1 = sc1.nextInt();
 
-                    if ((option1 < this.storeManager.getInventory().getProducts().size()) && (option1 > 0)) {
+
+                    if ((option1 < this.storeManager.getInventory().getProducts().size()) && (option1 > 0)
+                            && storeManager.getInventory().getStock().get(option1) > 0) {
                         addToCart(cart, option1);
                         validOption1 = true;
                     }
@@ -238,7 +265,7 @@ public class StoreView {
 
                         for(int i = 1; i < cart.getItemsInCart().size(); i++){
                             if ((cart.getItemsInCart().get(i)[0]) == option2){
-                                removeFromCart(cart, option2);
+                                removeFromCart(cart, option2, false);
                                 inCart = true;
                                 break;
                             }
@@ -340,6 +367,8 @@ public class StoreView {
                     users.add(newUser);
                     shoppingCart.add(new ShoppingCart(newUser.cartID));
 
+                    choice = users.size() - 1; // Automatically set storeview to next value
+
                     choiceValid = true;
                 }
             }
@@ -385,13 +414,20 @@ public class StoreView {
                         }
                     }
 
-                    if (!choiceString.equals("Q") && !choiceString.equals("VIEWCART")) {
+                    if (!choiceString.equals("Q")) {
 
-                        if (!choiceString.equals("REMOVEFROMCART") && !choiceString.equals("CHECKOUT")){
+                        if (!choiceString.equals("REMOVEFROMCART") && !choiceString.equals("CHECKOUT")
+                                && !choiceString.equals("VIEWCART")){
                             users.get(choice).printMenu(choiceString);
                         }
 
-                        users.get(choice).storeFunctions(choiceString, shoppingCart.get(choice));
+                        if (choiceString.equals("VIEWCART")){
+                            users.get(choice).viewCart(shoppingCart.get(choice), choiceString);
+                        }
+                        else{
+                            users.get(choice).storeFunctions(choiceString, shoppingCart.get(choice));
+                        }
+
 
                         if (choiceString.equals("CHECKOUT")){
                             users.set(choice, null);
@@ -410,11 +446,6 @@ public class StoreView {
                         if (StoreView.activeUsers(users)){
                             valid = false;
                         }
-
-
-                    }
-                    else if (choiceString.equals("VIEWCART")) {
-                        users.get(choice).viewCart(shoppingCart.get(choice), choiceString);
                     }
 
                 }
@@ -424,16 +455,26 @@ public class StoreView {
                 if(!choiceString.equals("Q") && StoreView.activeUsers(users) && !choiceString.equals("CHECKOUT")) {
 
                     while (!valid){
-                        System.out.print("DEACTIVATE PREVIOUS USER? (y/n) >>> "); // TODO: choose a nonsequential storeview to add, CRASHES, if user is deactivated, replace the items in cart
+                        System.out.print("DEACTIVATE PREVIOUS USER? (y/n) >>> ");
                         choiceString = sc.next().toUpperCase();
 
                         if (choiceString.equals("Y") || choiceString.equals("N")){
                             valid = true;
                         }
+
+
                     }
 
 
                     if (choiceString.equals("Y")) {
+
+                        ShoppingCart cartToEmpty = shoppingCart.get(choice);
+
+                        for (int i = 1 ; i < cartToEmpty.getItemsInCart().size(); i++){
+                            users.get(choice).removeFromCart(cartToEmpty,
+                                    cartToEmpty.getItemsInCart().get(i)[0], true);
+                        }
+
                         users.set(choice, null);
                     }
 
@@ -443,8 +484,5 @@ public class StoreView {
             }
         }
         System.out.println("ALL STOREVIEWS DEACTIVATED");
-
-        //TODO: Will need to empty all carts? Maybe not necessary cleanup unless
-        //we eventually are writing and reading from a text file
     }
 }

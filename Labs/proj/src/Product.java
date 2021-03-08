@@ -7,9 +7,6 @@
  *
  * SYSC 2004 Project - Milestone 2 Product Class
  *
- * Used to contain the info for each product sold in the
- * store
- *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */

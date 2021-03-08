@@ -7,38 +7,57 @@
  *
  * SYSC 2004 Project - Milestone 2 Shopping Cart Class
  *
- *  ***************************************************ADD DOCUMENTATION
- *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */
-
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 
+/**
+ * A shopping cart
+ */
 public class ShoppingCart {
 
     private int cartID;
-    private boolean inUse;
 
-
-    // [productID, quantity]
-
+    // { [productID, quantity] }
     private ArrayList<Integer[]> itemsInCart = new ArrayList<>();
 
-
-
+    /**
+     * Parametric constructor for ShoppingCart.
+     * Sets first element of itemsInCart to null to avoid indices shift
+     *
+     * @param cartID    int, sets cartID for this cart
+     */
     public ShoppingCart(int cartID){
-        this.inUse = true;
         this.cartID = cartID;
         this.itemsInCart.add(0, null);
     }
 
+    /**
+     * Accessor for itemsInCart ArrayList
+     *
+     * @return ArrayList    itemsInCart attribute
+     */
     public ArrayList<Integer[]> getItemsInCart(){
         return this.itemsInCart;
     }
 
+    /**
+     * Mutator for cartID attribute
+     *
+     * @param cartID    int, new cartID to be set
+     * @return void
+     */
+    public void setCartID(int cartID){
+        this.cartID = cartID;
+    }
 
+    /**
+     * Adds product to cart if valid
+     *
+     * @param productID   int, productID of product to be added
+     * @return boolean    true if product could be added, false otherwise
+     */
     public boolean addProduct(int productID){
 
         for (int i  = 1; i < itemsInCart.size(); i++){
@@ -54,6 +73,12 @@ public class ShoppingCart {
         return true;
     }
 
+    /**
+     * Removes product from cart if valid
+     *
+     * @param productID   int, productID of product to be removed
+     * @return boolean    true if product could be removed, false otherwise
+     */
     public boolean removeProduct(int productID){
 
         for (int i  = 1; i < itemsInCart.size(); i++){
@@ -66,13 +91,4 @@ public class ShoppingCart {
 
         return false;
     }
-
-    public void setCartID(int cartID){
-        this.cartID = cartID;
-    }
-
-    public ArrayList<Integer[]> getReceipt(){
-        return itemsInCart;
-    }
-
 }

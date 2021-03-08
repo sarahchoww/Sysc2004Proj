@@ -59,12 +59,28 @@ public class StoreManager {
         return this.cartID;
     }
 
+    /**
+     * Adds product to cart if valid, and removes stock from inventory
+     * accordingly
+     *
+     * @param productID     int, productID of specific product
+     * @param cart          ShoppingCart, user's cart that product is being added to
+     * @return void
+     */
     public void addToCart(ShoppingCart cart, int productID){
         if(cart.addProduct(productID)){
             inventory.removeStock(1, productID);
         }
     }
 
+    /**
+     * Removes product to cart if valid, and adds stock from inventory
+     * accordingly
+     *
+     * @param productID     int, productID of specific product
+     * @param cart          ShoppingCart, user's cart that product is being removed from
+     * @return void
+     */
     public void removeFromCart(ShoppingCart cart, int productID){
         if (cart.removeProduct(productID)){
             inventory.setStock(1, productID);
@@ -72,11 +88,10 @@ public class StoreManager {
     }
 
     /**
-     * Processes transaction. Returns total value of items purchased and removes
-     * them from stock. Return of -1 indicates error
+     * Prints user's receipt at checkout for their given Shopping Cart
      *
-     * @param cart     ArrayList<Integer[]>, list of quantity of each item and their IDs
-     * @return total    double, total value of items purchased
+     * @param cart      ShoppingCart, user's cart that is being checked out
+     * @return void
      */
     public void checkout (ShoppingCart cart) {
 

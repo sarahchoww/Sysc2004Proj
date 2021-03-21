@@ -157,7 +157,8 @@ public class InventoryTest {
     @Test
     @Order(6)
     public void testGetStock(){
-        assertEquals(testProducts1.size() + 1, i1.getStock().size(), "The get stock ArrayList is not working.");
+        assertEquals(testProducts1.size() + 1, i1.getStock().size(), "The get stock ArrayList is " +
+                "not working.");
     }
 
     /**

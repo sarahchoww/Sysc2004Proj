@@ -12,6 +12,7 @@
  */
 
 package storetest;
+
 import store.*;
 
 import org.junit.jupiter.api.*;
@@ -33,9 +34,15 @@ public class StoreManagerTest {
     private static StoreManager s1;
     private static ShoppingCart cart1;
 
+    /**
+     * Initializes static attributes for testing
+     *
+     * @return void
+     */
     @BeforeAll
     public static void init() {
         s1 = new StoreManager();
+
         //Add stock for the 4 products sold in our program
         s1.getInventory().getStock().addAll(Arrays.asList(5,5,5,5));
 
@@ -44,9 +51,14 @@ public class StoreManagerTest {
                 new Product("Piano", 2, 1999.99),
                 new Product("Flute", 3, 599.99),
                 new Product("Saxophone", 4, 799.99)));
-        cart1 = new ShoppingCart(1);
     }
 
+
+    /**
+     * Unit test for StoreManager constructor
+     *
+     * @return void
+     */
     @Test
     @Order(1)
     public void testConstructor() {
@@ -65,16 +77,26 @@ public class StoreManagerTest {
     }
 
 
+    /**
+     * Unit test for StoreManager addToCart method
+     *
+     * @return void
+     */
     @Test
-    @Order
+    @Order(2)
     public void testAddToCart() {
+
+        //Cart1 is initialized here and not in init, as cart1 being initialized
+        //in init would lead to faulty testing of the cartID array size
+        //in testConstructor
+        cart1 = new ShoppingCart(s1.assignNewCartID());
 
         //Models the 4 products that are available in our store
         final int PRODUCTID1 = 1;
         final int PRODUCTID2 = 2;
         final int PRODUCTID3 = 3;
         final int PRODUCTID4 = 4;
-        final int INITIALQUANTITY = 5;
+        final int INITIALQUANTITY = 5; //initial amount of stock for each product
 
         //Used to retrieve items from itemsInCart Array
         final int ID_INDEX = 0;
@@ -87,17 +109,21 @@ public class StoreManagerTest {
             s1.addToCart(cart1, PRODUCTID1);
 
             //Ensure product was added into correct position in itemsInCart Array
-            assertEquals(PRODUCTID1, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX]);
+            assertEquals(PRODUCTID1, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. PRODUCT ADDED TO WRONG INDEX");
 
             //Make sure size of array is correct
             assertEquals(expectedSize, cart1.getItemsInCart().size(),
                     "STOREMANAGER TEST - ADDTOCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
 
             //Ensure new product's quantity is correct
-            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX]);
+            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
 
             //Ensure inventory stock was decreased accordingly
-            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID1));
+            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID1),
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
         }
 
         //For product 2
@@ -107,17 +133,21 @@ public class StoreManagerTest {
             s1.addToCart(cart1, PRODUCTID2);
 
             //Ensure product was added into correct position in itemsInCart Array
-            assertEquals(PRODUCTID2, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX]);
+            assertEquals(PRODUCTID2, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. PRODUCT ADDED TO WRONG INDEX");
 
             //Make sure size of array is correct
             assertEquals(expectedSize, cart1.getItemsInCart().size(),
                     "STOREMANAGER TEST - ADDTOCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
 
             //Ensure new product's quantity is correct
-            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX]);
+            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
 
             //Ensure inventory stock was decreased accordingly
-            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID2));
+            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID2),
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
         }
 
         //For product 3
@@ -127,17 +157,21 @@ public class StoreManagerTest {
             s1.addToCart(cart1, PRODUCTID3);
 
             //Ensure product was added into correct position in itemsInCart Array
-            assertEquals(PRODUCTID3, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX]);
+            assertEquals(PRODUCTID3, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. PRODUCT ADDED TO WRONG INDEX");
 
             //Make sure size of array is correct
             assertEquals(expectedSize, cart1.getItemsInCart().size(),
                     "STOREMANAGER TEST - ADDTOCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
 
             //Ensure new product's quantity is correct
-            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX]);
+            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
 
             //Ensure inventory stock was decreased accordingly
-            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID3));
+            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID3),
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
         }
 
         //For product 4
@@ -147,26 +181,151 @@ public class StoreManagerTest {
             s1.addToCart(cart1, PRODUCTID4);
 
             //Ensure product was added into correct position in itemsInCart Array
-            assertEquals(PRODUCTID4, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX]);
+            assertEquals(PRODUCTID4, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. PRODUCT ADDED TO WRONG INDEX");
 
             //Make sure size of array is correct
             assertEquals(expectedSize, cart1.getItemsInCart().size(),
                     "STOREMANAGER TEST - ADDTOCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
 
             //Ensure new product's quantity is correct
-            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX]);
+            assertEquals(i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
 
             //Ensure inventory stock was decreased accordingly
-            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID4));
+            assertEquals(INITIALQUANTITY-i, s1.getInventory().getStock(PRODUCTID4),
+                    "STOREMANAGER TEST - ADDTOCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
         }
     }
 
+
+    /**
+     * Unit test for StoreManager removeFromCart method
+     *
+     * @return void
+     */
     @Test
+    @Order(3)
     public void testRemoveFromCart() {
+        final int PRODUCTID1 = 1;
+        final int PRODUCTID2 = 2;
+        final int PRODUCTID3 = 3;
+        final int PRODUCTID4 = 4;
+
+        //Used to retrieve items from itemsInCart Array
+        final int ID_INDEX = 0;
+        final int QUANTITY_INDEX = 1;
+
+        final int INITIALSTOCK = 2; //initial amount of stock for each product
+        final int INITIALQUANTITY = 3; //initial amount in cart for each product
+        final int ARRAYSIZE = 5; //Size of itemsInCart array should not change for removal
+
+        //For product 1
+        int expectedLocation = 1;
+        for (int i = 1; i <= 3; i++) {
+            s1.removeFromCart(cart1, PRODUCTID1);
+
+            //Ensure product is in correct position in itemsInCart Array
+            assertEquals(PRODUCTID1, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. PRODUCT ID ASSOCIATED WITH " +
+                            "WRONG INDEX");
+
+            //Make sure size of array is correct
+            assertEquals(ARRAYSIZE, cart1.getItemsInCart().size(),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
+
+            //Ensure product's changed quantity is correct
+            assertEquals(INITIALQUANTITY - i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
+
+            //Ensure inventory stock was increased accordingly
+            assertEquals(INITIALSTOCK+i, s1.getInventory().getStock(PRODUCTID1),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
+        }
+
+        //For product 2
+        expectedLocation = 2;
+        for (int i = 1; i <= 3; i++) {
+            s1.removeFromCart(cart1, PRODUCTID2);
+
+            //Ensure product is in correct position in itemsInCart Array
+            assertEquals(PRODUCTID2, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. PRODUCT ID ASSOCIATED WITH " +
+                            "WRONG INDEX");
+
+            //Make sure size of array is correct
+            assertEquals(ARRAYSIZE, cart1.getItemsInCart().size(),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
+
+            //Ensure product's changed quantity is correct
+            assertEquals(INITIALQUANTITY - i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
+
+            //Ensure inventory stock was increased accordingly
+            assertEquals(INITIALSTOCK+i, s1.getInventory().getStock(PRODUCTID2),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
+        }
+
+        //For product 3
+        expectedLocation = 3;
+        for (int i = 1; i <= 3; i++) {
+            s1.removeFromCart(cart1, PRODUCTID3);
+
+            //Ensure product is in correct position in itemsInCart Array
+            assertEquals(PRODUCTID3, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. PRODUCT ID ASSOCIATED WITH " +
+                            "WRONG INDEX");
+
+            //Make sure size of array is correct
+            assertEquals(ARRAYSIZE, cart1.getItemsInCart().size(),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
+
+            //Ensure product's changed quantity is correct
+            assertEquals(INITIALQUANTITY - i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
+
+            //Ensure inventory stock was increased accordingly
+            assertEquals(INITIALSTOCK+i, s1.getInventory().getStock(PRODUCTID3),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
+        }
+
+        //For product 4
+        expectedLocation = 4;
+        for (int i = 1; i <= 3; i++) {
+            s1.removeFromCart(cart1, PRODUCTID4);
+
+            //Ensure product is in correct position in itemsInCart Array
+            assertEquals(PRODUCTID4, cart1.getItemsInCart().get(expectedLocation)[ID_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. PRODUCT ID ASSOCIATED WITH " +
+                            "WRONG INDEX");
+
+            //Make sure size of array is correct
+            assertEquals(ARRAYSIZE, cart1.getItemsInCart().size(),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. ITEMSINCART ARRAY SIZE IS INCORRECT");
+
+            //Ensure product's changed quantity is correct
+            assertEquals(INITIALQUANTITY - i, cart1.getItemsInCart().get(expectedLocation)[QUANTITY_INDEX],
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INCORRECT QUANTITY OF PRODUCT AT INDEX " +
+                            expectedLocation);
+
+            //Ensure inventory stock was increased accordingly
+            assertEquals(INITIALSTOCK+i, s1.getInventory().getStock(PRODUCTID4),
+                    "STOREMANAGER TEST - REMOVEFROMCART >> FAILED. INVENTORY NOT DECREASED CORRECTLY");
+        }
     }
 
+
+    /**
+     * Unit test for StoreManager assignNewCartID method
+     *
+     * @return void
+     */
     @Test
-    @Order(2)
+    @Order(4)
     public void testAssignNewCartID() {
 
         int cartID = 0; //should never have a cartID be 0
@@ -179,13 +338,13 @@ public class StoreManagerTest {
             assertNotNull(cartID,
                     "STOREMANAGER TEST - ASSIGNNEWCARTID >> FAILED. CARTID IS NULL");
 
-            //cartIDs are assigned sequentially, should match counter i of for loop
+            //cartIDs are assigned sequentially
             assertEquals(i, cartID,
                     "STOREMANAGER TEST - ASSIGNNEWCARTID >> FAILED. INCORRECT CARTID");
 
             //Ensure size is being increased correctly
             assertEquals(i+1, s1.getCartID().size(),
-                    "STOREMANAGER TEST - ASSIGNNEWCARTID >> FAILED. INCORRECT CARTID");
+                    "STOREMANAGER TEST - ASSIGNNEWCARTID >> FAILED. CARTID ARRAY IS INCORRECT SIZE");
         }
     }
 

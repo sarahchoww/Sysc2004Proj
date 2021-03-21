@@ -1,9 +1,9 @@
-package store; /**
+/**
  *              SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 2.0
+ * @version 3.0
  *
  * SYSC 2004 Project - Milestone 2 Store Manager Class
  *
@@ -11,6 +11,7 @@ package store; /**
  * All rights reserved.
  */
 
+package store;
 
 import java.util.ArrayList;
 

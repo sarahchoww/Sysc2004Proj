@@ -17,6 +17,7 @@ import store.*;
 
 import org.junit.jupiter.api.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,6 +34,8 @@ public class StoreManagerTest {
 
     private static StoreManager s1;
     private static ShoppingCart cart1;
+
+    private static ArrayList<String> productNames;
 
     /**
      * Initializes static attributes for testing
@@ -51,6 +54,10 @@ public class StoreManagerTest {
                 new Product("Piano", 2, 1999.99),
                 new Product("Flute", 3, 599.99),
                 new Product("Saxophone", 4, 799.99)));
+
+        productNames = new ArrayList<>();
+
+        productNames.addAll(Arrays.asList("Guitar", "Piano", "Flute", "Saxophone"));
     }
 
 
@@ -345,6 +352,53 @@ public class StoreManagerTest {
             //Ensure size is being increased correctly
             assertEquals(i+1, s1.getCartID().size(),
                     "STOREMANAGER TEST - ASSIGNNEWCARTID >> FAILED. CARTID ARRAY IS INCORRECT SIZE");
+        }
+    }
+
+    /**
+     * This method tests the getter of the Inventory object. It compares each Product name in the Inventory
+     * with the expected Product name.
+     */
+    @Test
+    @Order(5)
+    public void testGetInventory(){
+        Inventory testInventory = s1.getInventory();
+
+        for (int i = 1; i < testInventory.getProducts().size(); i++) {
+            assertEquals(productNames.get(i - 1), s1.getInventory().getProduct(i).getName(), "The get " +
+                    "Inventory method is not working.");
+        }
+    }
+
+    /**
+     * This method checks the stock of the current Products in Inventory. It checks the expected stock value
+     * against the actual stock value.
+     */
+    @Test
+    @Order(6)
+    public void testGetStock(){
+        final int CURRENTSTOCK = 5; // All Products should have a stock value of 5
+
+        for (int i = 1; i < s1.getInventory().getProducts().size(); i++){
+            assertEquals(CURRENTSTOCK, s1.getStock(i), "The get stock value is incorrect.");
+        }
+    }
+
+    /**
+     * This method checks the cartID list of the current StoreManager. It compares each expected value with the
+     * actual value in the list.
+     */
+    @Test
+    @Order(7)
+    public void testGetCartID(){
+        int counter = 0;
+        ArrayList<Integer> expectedCartIDs = new ArrayList<>();
+        expectedCartIDs.addAll(Arrays.asList(null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+        for (Integer cartID : s1.getCartID()){
+            assertEquals(expectedCartIDs.get(counter), cartID, "The get CartID value is correct for cartID " +
+                    cartID + ".");
+            counter++;
         }
     }
 

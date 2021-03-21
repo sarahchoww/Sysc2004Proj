@@ -3,6 +3,8 @@
 /workspace.xml
 /out/
 
+
 .idea/
 *.xml
 *.yaml
+*.html

@@ -1,4 +1,4 @@
-/**
+package store; /**
  *              SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
@@ -34,7 +34,7 @@ public class StoreManager {
     /**
      * Accessor for inventory attribute
      *
-     * @return inventory     Inventory, inventory attribute for this class
+     * @return inventory     store.Inventory, inventory attribute for this class
      */
     public Inventory getInventory() {
         return this.inventory;
@@ -64,7 +64,7 @@ public class StoreManager {
      * accordingly
      *
      * @param productID     int, productID of specific product
-     * @param cart          ShoppingCart, user's cart that product is being added to
+     * @param cart          store.ShoppingCart, user's cart that product is being added to
      * @return void
      */
     public void addToCart(ShoppingCart cart, int productID){
@@ -78,7 +78,7 @@ public class StoreManager {
      * accordingly
      *
      * @param productID     int, productID of specific product
-     * @param cart          ShoppingCart, user's cart that product is being removed from
+     * @param cart          store.ShoppingCart, user's cart that product is being removed from
      * @return void
      */
     public void removeFromCart(ShoppingCart cart, int productID){
@@ -90,7 +90,7 @@ public class StoreManager {
     /**
      * Prints user's receipt at checkout for their given Shopping Cart
      *
-     * @param cart      ShoppingCart, user's cart that is being checked out
+     * @param cart      store.ShoppingCart, user's cart that is being checked out
      * @return void
      */
     public void checkout (ShoppingCart cart) {
@@ -107,7 +107,7 @@ public class StoreManager {
         int quantity;
 
         System.out.println("|-------------RECEIPT-------------|");
-        System.out.println("Quantity | Product Name |    PRICE");
+        System.out.println("Quantity | store.Product Name |    PRICE");
 
 
         for (int i = 1; i < items.size(); i++){
@@ -117,7 +117,8 @@ public class StoreManager {
             if (quantity > 0){
                 System.out.printf("%8s %14s %10s%n", items.get(i)[QUANTITY_INDEX],
                         getInventory().getProduct(items.get(i)[ID_INDEX]).getName(),
-                        (getInventory().getProduct(items.get(i)[ID_INDEX]).getPrice()) * (items.get(i)[QUANTITY_INDEX]));
+                        (getInventory().getProduct(items.get(i)[ID_INDEX]).getPrice()) *
+                                (items.get(i)[QUANTITY_INDEX]));
 
                 total += this.inventory.getProduct(productID).getPrice() * quantity;
             }
@@ -129,7 +130,7 @@ public class StoreManager {
     }
 
     /**
-     * Assigns new cart ID when new StoreView object is created. ID matches
+     * Assigns new cart ID when new store.StoreView object is created. ID matches
      * location in cartID arraylist
      *
      * @return int    returns the new assigned cartID

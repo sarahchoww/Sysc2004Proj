@@ -1,4 +1,4 @@
-/**
+package store; /**
  *                 SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
@@ -23,7 +23,7 @@ public class ShoppingCart {
     private ArrayList<Integer[]> itemsInCart = new ArrayList<>();
 
     /**
-     * Parametric constructor for ShoppingCart.
+     * Parametric constructor for store.ShoppingCart.
      * Sets first element of itemsInCart to null to avoid indices shift
      *
      * @param cartID    int, sets cartID for this cart

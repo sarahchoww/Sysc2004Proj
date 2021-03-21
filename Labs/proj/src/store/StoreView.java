@@ -242,24 +242,35 @@ public class StoreView {
 
         switch(choiceString){
             case ("ADDTOCART"):
-
+                Scanner sc1 = new Scanner(System.in);
                 boolean validOption1 = false;
+                int option1;
 
-                while(!validOption1){
-                    System.out.print("Option: ");
-                    Scanner sc1 = new Scanner(System.in);
-                    int option1 = sc1.nextInt();
+                while(!validOption1) {
+                    try {
+                        System.out.print("Option: ");
+                        sc1 = new Scanner(System.in);
+                        option1 = sc1.nextInt();
 
-
-                    if ((option1 < this.storeManager.getInventory().getProducts().size()) && (option1 > 0)
-                            && storeManager.getInventory().getStock().get(option1) > 0) {
-                        addToCart(cart, option1);
-                        validOption1 = true;
+                        if ((option1 < this.storeManager.getInventory().getProducts().size()) && (option1 > 0)
+                                && storeManager.getInventory().getStock().get(option1) > 0) {
+                            addToCart(cart, option1);
+                            validOption1 = true;
+                        }
+                        else{
+                            System.out.println("MAIN > ERROR > OPTION OUT OF BOUNDS");
+                        }
                     }
-                    else{
-                        System.out.println("MAIN > ERROR > INVALID OPTION");
+                    catch (InputMismatchException e) {
+                        System.out.println("MAIN > ERROR > CANNOT CONVERT STRING TO INT");
                     }
+
                 }
+
+
+
+
+
 
                 break;
 
@@ -267,24 +278,31 @@ public class StoreView {
 
                 if (this.viewCart(cart, choiceString)){
                     boolean inCart = false;
+                    Scanner sc2 = new Scanner(System.in);
+                    int option2;
 
                     while(!inCart){
+                        try{
+                            System.out.print("Option: ");
+                            sc2 = new Scanner(System.in);
+                            option2 = sc2.nextInt();
 
-                        System.out.print("Option: ");
-                        Scanner sc2 = new Scanner(System.in);
-                        int option2 = sc2.nextInt();
+                            for(int i = 1; i < cart.getItemsInCart().size(); i++){
+                                if ((cart.getItemsInCart().get(i)[0]) == option2){
+                                    removeFromCart(cart, option2, false);
+                                    inCart = true;
+                                    break;
+                                }
+                            }
 
-                        for(int i = 1; i < cart.getItemsInCart().size(); i++){
-                            if ((cart.getItemsInCart().get(i)[0]) == option2){
-                                removeFromCart(cart, option2, false);
-                                inCart = true;
-                                break;
+                            if (!inCart){
+                                System.out.println("MAIN > ERROR > INVALID OPTION");
                             }
                         }
-
-                        if (!inCart){
-                            System.out.println("MAIN > ERROR > INVALID OPTION");
+                        catch (InputMismatchException e){
+                            System.out.println("MAIN > ERROR > CANNOT CONVERT STRING TO INT");
                         }
+
                     }
                 }
 
@@ -357,10 +375,22 @@ public class StoreView {
             boolean valid = false; // For user error checking
             StoreView.printUsers(users);
 
-            System.out.print("CHOOSE YOUR STOREVIEW >>> ");
-            int choice = sc.nextInt();
+            int choice = -1;
+            while (!valid){
+                try{
+                    System.out.print("CHOOSE YOUR STOREVIEW >>> ");
+                    sc = new Scanner(System.in);
+                    choice = sc.nextInt();
+                    valid = true;
+                }
+                catch (InputMismatchException e){
+                    System.out.println("CANNOT CONVERT STRING TO INT");
+                }
+            }
+
 
             boolean choiceValid = false;
+            valid = false;
 
             //If storeview input is valid but not a current storeview, add
             //new storeview (ID won't match user input however)

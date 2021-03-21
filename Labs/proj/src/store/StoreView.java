@@ -23,9 +23,9 @@ public class StoreView {
     private int cartID;
 
     /**
-     * Parametric constructor for a store.StoreView
+     * Parametric constructor for a StoreView
      *
-     * @param storeManager  store.StoreManager, Store View's store manager
+     * @param storeManager  StoreManager, Store View's store manager
      * @param cartID        int, cartID for the Store View
      */
     public StoreView(StoreManager storeManager, int cartID) {
@@ -36,7 +36,7 @@ public class StoreView {
     /**
      * Prints available StoreViews and deactivated StoreViews to the screen
      *
-     * @param users    ArrayList<store.StoreView>, arraylist of all users
+     * @param users    ArrayList<StoreView>, arraylist of all users
      * @return void
      */
     private static void printUsers(ArrayList<StoreView> users) {
@@ -86,7 +86,7 @@ public class StoreView {
     /**
      * Returns whether or not there are any active users
      *
-     * @param users     ArrayList<store.StoreView>, arraylist of all users
+     * @param users     ArrayList<StoreView>, arraylist of all users
      * @return boolean  true if there are active users, false otherwise
      */
     private static boolean activeUsers(ArrayList<StoreView> users) {
@@ -112,7 +112,7 @@ public class StoreView {
         System.out.println();
         System.out.println(command.toUpperCase());
         System.out.println("|---------THE MUSIC STORE---------|");
-        System.out.print("Stock | store.Product Name | Unit Price");
+        System.out.print("Stock | Product Name | Unit Price");
 
         if (command.equals("ADDTOCART")){
             addToCart = true;
@@ -146,7 +146,7 @@ public class StoreView {
     /**
      * This method displays the current items in the cart. It shows the quantity, product name, and unit price
      * of the item.
-     * @param cart       store.ShoppingCart, represents the shopping cart object of the user
+     * @param cart       ShoppingCart, represents the shopping cart object of the user
      * @param command    String, command represents the command the user requests
      * @return boolean   represents whether the operation was successful
      */
@@ -160,7 +160,7 @@ public class StoreView {
         ArrayList<Integer[]> items = cart.getItemsInCart();
 
         System.out.println("|---------SHOPPING CART---------|");
-        System.out.print("Quantity | store.Product Name | Unit Price");
+        System.out.print("Quantity | Product Name | Unit Price");
 
 
         if (command.equals("REMOVEFROMCART")){
@@ -195,7 +195,7 @@ public class StoreView {
     /**
      * This method adds an item to the user's shopping cart
      *
-     * @param cart          store.ShoppingCart, represents the user's shopping cart
+     * @param cart          ShoppingCart, represents the user's shopping cart
      * @param productID     int, represents the productID of the product to be added
      */
     private void addToCart(ShoppingCart cart, int productID){
@@ -206,7 +206,7 @@ public class StoreView {
 
     /**
      * This method removes an item from the user's shopping cart.
-     * @param cart          store.ShoppingCart, represents the user's shopping cart
+     * @param cart          ShoppingCart, represents the user's shopping cart
      * @param productID     int, represents the productID of the product to be added
      * @param emptyCart     boolean, represents whether the user is emptying the entire cart
      */
@@ -219,10 +219,10 @@ public class StoreView {
     }
 
     /**
-     * This methods calls on the store.StoreManager's checkout method.
+     * This methods calls on the StoreManager's checkout method.
      * It checks out the products in the cart.
      *
-     * @param cart  store.ShoppingCart, represents the user's cart
+     * @param cart  ShoppingCart, represents the user's cart
      * @return void
      */
     private void checkout(ShoppingCart cart){
@@ -233,7 +233,7 @@ public class StoreView {
      * Helper method to call specific methods for each possible command
      *
      * @param choiceString  String, command user has input that they want to run
-     * @param cart          store.ShoppingCart, user's shopping cart
+     * @param cart          ShoppingCart, user's shopping cart
      * @return void
      */
     private void storeFunctions(String choiceString, ShoppingCart cart){
@@ -301,8 +301,8 @@ public class StoreView {
     /**
      * Setter method for storeManager attribute
      *
-     * @param sm        store.StoreManager, storeManager attribute getting set
-     *                  !!!Will affect all instances as store.StoreManager is static
+     * @param sm        StoreManager, storeManager attribute getting set
+     *                  !!!Will affect all instances as StoreManager is static
      * @return void
      */
     public void setStoreManager(StoreManager sm){

@@ -5,14 +5,14 @@ package store; /**
  * @author Sarah Chow, 101143033
  * @version 2.0
  *
- * SYSC 2004 Project - Milestone 2 store.Product Class
+ * SYSC 2004 Project - Milestone 2 Product Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */
 
 /**
- * A store.Product class. Contains the info for each product sold in the store
+ * A Product class. Contains the info for each product sold in the store
  */
 
 public class Product {
@@ -22,7 +22,7 @@ public class Product {
     private final double PRICE;
 
     /**
-     * Parametric constructor for a store.Product.
+     * Parametric constructor for a Product.
      *
      * @param name          String, product name
      * @param productID     int, productID

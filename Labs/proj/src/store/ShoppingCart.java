@@ -23,7 +23,7 @@ public class ShoppingCart {
     private ArrayList<Integer[]> itemsInCart = new ArrayList<>();
 
     /**
-     * Parametric constructor for store.ShoppingCart.
+     * Parametric constructor for ShoppingCart.
      * Sets first element of itemsInCart to null to avoid indices shift
      *
      * @param cartID    int, sets cartID for this cart

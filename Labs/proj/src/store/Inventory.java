@@ -5,7 +5,7 @@ package store; /**
  * @author Sarah Chow, 101143033
  * @version 2.0
  *
- * SYSC 2004 Project - Milestone 2 store.Inventory Class
+ * SYSC 2004 Project - Milestone 2 Inventory Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -14,7 +14,7 @@ package store; /**
 import java.util.ArrayList;
 
 /**
- * store.Inventory Class. Used to manage the store's products, as well as
+ * Inventory Class. Used to manage the store's products, as well as
  * the stock of each product
  */
 
@@ -36,10 +36,10 @@ public class Inventory {
     }
 
     /**
-     * Wrapper method to get the store.Product object from the productID
+     * Wrapper method to get the Product object from the productID
      *
-     * @param productID     int, productID of the store.Product being searched for
-     * @return store.Product      returns the store.Product object with the given ID
+     * @param productID     int, productID of the Product being searched for
+     * @return Product      returns the Product object with the given ID
      */
     public Product getProduct(int productID){
         return products.get(productID);
@@ -70,7 +70,7 @@ public class Inventory {
      * @return void
      */
     public void getProductInfo(int productID){
-        System.out.println("Name: " + getProduct(productID).getName() + " store.Product ID: " + productID +
+        System.out.println("Name: " + getProduct(productID).getName() + " Product ID: " + productID +
                 " Price: " + getProduct(productID).getPrice());
     }
 

@@ -34,7 +34,7 @@ public class StoreManager {
     /**
      * Accessor for inventory attribute
      *
-     * @return inventory     store.Inventory, inventory attribute for this class
+     * @return inventory     Inventory, inventory attribute for this class
      */
     public Inventory getInventory() {
         return this.inventory;
@@ -64,7 +64,7 @@ public class StoreManager {
      * accordingly
      *
      * @param productID     int, productID of specific product
-     * @param cart          store.ShoppingCart, user's cart that product is being added to
+     * @param cart          ShoppingCart, user's cart that product is being added to
      * @return void
      */
     public void addToCart(ShoppingCart cart, int productID){
@@ -78,7 +78,7 @@ public class StoreManager {
      * accordingly
      *
      * @param productID     int, productID of specific product
-     * @param cart          store.ShoppingCart, user's cart that product is being removed from
+     * @param cart          ShoppingCart, user's cart that product is being removed from
      * @return void
      */
     public void removeFromCart(ShoppingCart cart, int productID){
@@ -90,7 +90,7 @@ public class StoreManager {
     /**
      * Prints user's receipt at checkout for their given Shopping Cart
      *
-     * @param cart      store.ShoppingCart, user's cart that is being checked out
+     * @param cart      ShoppingCart, user's cart that is being checked out
      * @return void
      */
     public void checkout (ShoppingCart cart) {
@@ -107,7 +107,7 @@ public class StoreManager {
         int quantity;
 
         System.out.println("|-------------RECEIPT-------------|");
-        System.out.println("Quantity | store.Product Name |    PRICE");
+        System.out.println("Quantity | Product Name |    PRICE");
 
 
         for (int i = 1; i < items.size(); i++){
@@ -130,7 +130,7 @@ public class StoreManager {
     }
 
     /**
-     * Assigns new cart ID when new store.StoreView object is created. ID matches
+     * Assigns new cart ID when new StoreView object is created. ID matches
      * location in cartID arraylist
      *
      * @return int    returns the new assigned cartID

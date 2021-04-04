@@ -1,0 +1,56 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: There would be a runtime error upon reaching the Child object in the loop
+    (because Child would not have <code>aMethod()</code>).
+  is_correct: false
+- text: There would be a compilation error because Child must implement all methods
+    in its superclass.
+  is_correct: false
+- text: There would be a compilation error because <code>parentArray</code> would
+    no longer be able to hold the Child object.
+  is_correct: false
+- text: The code will print "parent" three times.
+  is_correct: true
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Child.java
+  visible: true
+  text: |
+    public class Child extends Parent {
+        public void aMethod() {
+            System.out.println("child");
+        }
+    }
+  learner_created: false
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+
+          Parent[] parentArray = {new Parent(), new Child(), new Parent()};
+
+          for (Parent p : parentArray) {
+             p.aMethod();
+          }
+       }
+    }
+  learner_created: false
+- name: src/Parent.java
+  visible: true
+  text: |
+    public class Parent {
+        public void aMethod() {
+            System.out.println("parent");
+        }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 06 Mar 2021 02:38:33 UTC
+record: -1
+selected_options:
+- 3

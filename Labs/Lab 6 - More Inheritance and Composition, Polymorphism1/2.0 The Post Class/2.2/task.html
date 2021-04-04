@@ -1,0 +1,102 @@
+<html>
+<head>
+    <style type ="text/css">
+       .footer{
+           position: fixed;
+           text-align: left;
+           line-height: 1.5;
+           bottom: 0px;
+           left: 5px;
+           width: 100%;
+       }
+        </style>
+    <style type ="text/css">
+       .body {
+           padding-bottom: 200px;
+       }
+    </style>
+</head>
+<body>
+<div class="body">
+    <h1>Lab 6 - More Inheritance and Composition, Polymorphism</h1>
+    <p>Authors: <strong>Martin Klamrowski</strong>, <strong>Cristina Ruiz Martin</strong></p>
+    <p>Relevant textbook reading - <strong>Chapter 7</strong> (The Object Oriented Thought Process)</p>
+    <h3>~2.0 The Post Class~</h3>
+    <p>
+        In this section you will be building the Post class that will form the basis of this lab's Lab Problem.
+    </p>
+    <h3>~Task 2.2~</h3>
+    <p>
+        It is a good idea to include accessor methods for all of Post's fields.
+    </p>
+    <p>
+        Post has some important methods:
+    </p>
+    <ul>
+        <li>
+            <code>react()</code>:
+            <ul>
+                <li>
+                    This method adds a specified reaction (one of the emojis) to <code>reactions</code>.
+                </li>
+                <li>
+                    This method does not return anything.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <code>addComment()</code>:
+            <ul>
+                <li>
+                    This method adds a new comment to <code>comments</code>.
+                </li>
+                <li>
+                    This method does not return anything. A CommentPost is passed as a parameter.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <code>display()</code>:
+            <ul>
+                <li>
+                    This method displays the Post and all of its relevant information textually.
+                </li>
+                <li>
+                    The format of a Post will look like this:<br><br>
+                    <code>
+                        Chris Mascarolls on (Sat Dec 24 20:47:32 EST 2020):<br>
+                        'Deck the halls.'<br>
+                        =)(32) =|(13) =((1) =O(0)<br>
+                        Comments:<br>
+                        -> 'What are your plans?!' - Wanda Nauwittol (Sat Dec 24 20:47:33 EST 2020)<br>
+                        -> 'Yay!' - Jude Alkingtomie (Sat Dec 24 20:48:32 EST 2020)<br>
+                        -> 'Nope!' - Grinch Grinch (Sat Dec 24 24:48:32 EST 2020)<br>
+                    </code><br>
+                    The String format is already created for you in this section's Post class. You just need to insert
+                    the correct information inside <code>String.format()</code>. <i>Note: for validation purposes,
+                    just put in "DATE"; the date will vary depending on when you complete this lab.</i>
+                </li>
+                <li>
+                    You can get the time in the above format by consulting the documentation for the java.util.Calendar
+                    class:
+                    <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html#getTime--">Oracle Docs: Calendar</a>.
+                </li>
+                <li>
+                    Remember to bring over <code>Comment.java</code> from Task 2.1.
+                </li>
+            </ul>
+        </li>
+    </ul>
+    If you implemented the above correctly, the code in <code>Main.java</code> should validate correctly upon clicking
+    'Check' below.
+</div>
+
+</body>
+<!--<div class="footer">-->
+<!--    <p>-->
+<!--        <strong>Question:</strong> What would happen if you removed <code>aMethod()</code> from the Child class and ran-->
+<!--        the code again?-->
+<!--    </p>-->
+<!--</div>-->
+
+</html>

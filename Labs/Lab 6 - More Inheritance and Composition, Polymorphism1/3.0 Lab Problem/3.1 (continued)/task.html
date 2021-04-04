@@ -1,0 +1,178 @@
+<html>
+<head>
+    <style type ="text/css">
+        .footer {
+            position: fixed;
+            text-align: left;
+            bottom: 0px;
+            left: 5px;
+            width: 100%;
+        }
+    </style>
+    <style type ="text/css">
+       .body {
+            padding-bottom: 50px;
+       }
+    </style>
+    <style>
+       .preamble {
+            border: 5px rgb(255, 0, 0) dashed;
+            padding: 5px;
+            display: block;
+       }
+    </style>
+</head>
+<body>
+<div class="body">
+    <h1>Lab 6 - More Inheritance and Composition, Polymorphism</h1>
+    <p>Authors: <strong>Martin Klamrowski</strong>, <strong>Cristina Ruiz Martin</strong></p>
+    <p>Relevant textbook reading - <strong>Chapter 7</strong> (The Object Oriented Thought Process)</p>
+    <h3>~3.0 Lab Problem~</h3>
+    <div class="preamble">
+        <p>
+            You must submit your solution to this problem on CuLearn.
+            <strong>
+                YOU MUST INCLUDE YOUR FULL NAME AND STUDENT NUMBER IN COMMENTS AT THE
+                HEAD OF EVERY FILE YOU SUBMIT
+            </strong>.
+        </p>
+        <p>
+            Submit <strong><u><i>ONLY</i></u></strong> the files specified at the end of this big red box. The files
+            and code within should be completed according to the specifications made <i>throughout</i> the Lab, and only
+            the final versions should be submitted. I.e., if Task 55.23 tells you to add accessor methods to MyClass,
+            you are required to include that code if MyClass needs to be submitted as part of the solution to the
+            Lab Problem (<strong>unless</strong> a later Task or the Lab Problem state otherwise).
+        </p>
+        <p>
+            Do not include redundant methods. Do not include methods that are not asked for or necessary. Some Lab
+            Problems will not explicitly state you need accessor methods, but these methods may be necessary.
+        </p>
+        <p>
+            Now that you have learned how to document code, you need to document your classes for full marks!
+            <strong>This is applicable from Lab 4 until the end of the course.</strong>
+        </p>
+        <p>
+            If you choose to complete the problem in this environment, the files can be
+            retrieved by right-clicking '3.0 Lab Problem'>Show in Files/Explorer.
+        </p>
+        <p>
+            Submit <strong>Post.java</strong>, <strong>PostWall.java</strong>, <strong>VideoPost.java</strong>,
+            <strong>PollPost.java</strong>,
+            <strong>MessagePost.java</strong>, <strong>Comment.java</strong>
+            when you are done.
+        </p>
+    </div>
+    <h3>~Problem 3.1 (continued)~</h3>
+    <p>
+        This is Problem 3.1 continued. You will be coding the VideoPost, PollPost, MessagePost, Comment classes.
+    </p>
+    <p>
+        You need to determine which of these classes should subclass Post. Feel free to completely refactor the Post
+        class to make effective use of method overrides and overloads. You can assume an instance of Post will never be
+        used in the PostWall, i.e. it will always be a VideoPost, PollPost, or MessagePost. In the future, Post would be
+        a good candidate for an interface. In general, you should always code against an interface when implementing your
+        polymorphic behaviour. But this is a topic for a future lab.
+    </p>
+    <p>
+        While inheritance is a viable strategy for this lab, composition could be a better solution. We will stick to
+        inheritance for this lab because we want to be able to handle Post objects in a polymorphic manner within the
+        PostWall class (we want to be able to call <code>display()</code> across all Posts on the wall).
+    </p>
+    <ul>
+        <li>
+            <strong>Comment:</strong>
+            <ul>
+                <li>
+                    This is a class that will be used to model comments. Comments get displayed on other posts, never
+                    on their own.
+                </li>
+                <li>
+                    A Comment has a message (could be <code>content</code>), an <code>author</code>, and a
+                    <code>time</code>.
+                </li>
+                <li>
+                    A Comment cannot be commented on. A Comment cannot be reacted to.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>VideoPost:</strong>
+            <ul>
+                <li>
+                    This subtype of Post is very similar to its superclass. A disclaimer
+                    should be displayed above the <strong>entire</strong> post (i.e. on top of it). The disclaimer
+                    should say "VIEWER DISCRETION ADVISED" if it is set when the VideoPost is instantiated.
+                </li>
+                <li>
+                    Content in a VideoPost will be a url. These should simply be Strings.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>PollPost:</strong>
+            <ul>
+                <li>
+                    This subtype of Post is different in that it can be "reacted" to in two ways. This post should still
+                    be displayed with the emoji counters, but users can also submit a String answer. These will
+                    typically be a single word and can be anything!
+                </li>
+                <li>
+                    A PollPost should have a poll question and answers to the poll question as its content section.
+                </li>
+                <li>
+                    Notice the answers contain a count next to them, and they are not sorted. You can use the
+                    StringIntPair class provided to simplify your collection of poll answers in PollPost.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>MessagePost:</strong>
+            <ul>
+                <li>
+                    This subtype of Post should essentially be the Post class you created in section 2.0. It should have
+                    a message as <code>content</code> and display identically to the Post class from section 2.0.
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p>
+        A call to <code>PostWall.generate()</code> with an example of each type of post is displayed below for
+        reference.<br><br>
+        <code>
+            Chris Mascarolls on (Sun Dec 06 14:24:06 EST 2020):<br>
+            'Deck the halls.'<br>
+            =)(32) =|(13) =((1) =O(0)<br>
+            Comments:<br>
+            -> 'What are your plans?!' - Wanda Nauwittol (Sun Dec 06 14:24:06 EST 2020)<br>
+            -> 'Yay!' - Jude Alkingtomie (Sun Dec 06 14:24:06 EST 2020)<br>
+            -> 'Nope!' - Grinch Grinch (Sun Dec 06 14:24:06 EST 2020)<br>
+            <br>
+            --------------------------------------------------<br>
+            -VIEWER DISCRETION ADVISED-<br>
+            Grinch Grinch on (Sun Dec 06 14:24:06 EST 2020):<br>
+            'This bumps! https://www.youtube.com/watch?v=GAs67cRfmQI&ab_channel=Tyler%2CTheCreator-Topic'<br>
+            =)(1) =|(13) =((0) =O(0)<br>
+            Comments:<br>
+            <br>
+            --------------------------------------------------<br>
+            Wanda Nauwittol on (Sun Dec 06 14:24:06 EST 2020):<br>
+            'What's everyone doing for Christmas Break!?'<br>
+            Eat! (2)<br>
+            Eat (1)<br>
+            Celebrate (2)<br>
+            Not study! (3)<br>
+            =)(5) =|(3) =((1) =O(0)<br>
+            Comments:<br>
+            -> 'Yes.' - Jude Alkingtomie (Sun Dec 06 14:24:06 EST 2020)<br>
+            -> 'Nothing... >:)' - Grinch Grinch (Sun Dec 06 14:24:06 EST 2020)<br>
+            <br>
+            --------------------------------------------------
+        </code>
+    </p>
+</div>
+</body>
+<!--<div class="footer">-->
+<!--    &lt;!&ndash;<strong>You can run your code here.</strong>&ndash;&gt;-->
+<!--</div>-->
+
+</html>

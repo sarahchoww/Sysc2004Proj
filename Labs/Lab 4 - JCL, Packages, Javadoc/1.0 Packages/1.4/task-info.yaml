@@ -1,0 +1,78 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: private.
+  is_correct: true
+- text: protected.
+  is_correct: false
+- text: public.
+  is_correct: false
+- text: '&lt;default&gt;.'
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+          // you can test here
+       }
+    }
+  learner_created: false
+- name: src/one/A.java
+  visible: true
+  text: |
+    package one;
+
+    public class A {
+
+        protected void doSomething() {
+            System.out.println("I Am A");
+        }
+    }
+  learner_created: false
+- name: src/one/B.java
+  visible: true
+  text: |
+    package one;
+
+    public class B {
+
+        protected void doSomething() {
+            System.out.println("I Am B");
+        }
+    }
+  learner_created: false
+- name: src/two/C.java
+  visible: true
+  text: |
+    package two;
+
+    public class C {
+
+        protected void doSomething() {
+            System.out.println("I Am C");
+        }
+    }
+  learner_created: false
+- name: src/two/D.java
+  visible: true
+  text: |
+    package two;
+
+    public class D {
+
+        protected void doSomething() {
+            System.out.println("I Am D");
+        }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 17 Feb 2021 18:42:21 UTC
+record: -1
+selected_options:
+- 0

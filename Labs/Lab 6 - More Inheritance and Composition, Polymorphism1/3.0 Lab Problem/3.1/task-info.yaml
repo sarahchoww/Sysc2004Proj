@@ -1,0 +1,25 @@
+type: theory
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+          // ...
+       }
+    }
+  learner_created: false
+- name: src/PostWall.java
+  visible: true
+  learner_created: true
+- name: src/Post.java
+  visible: true
+  learner_created: true
+- name: src/Comment.java
+  visible: true
+  learner_created: true
+status: Solved
+feedback:
+  time: Sat, 06 Mar 2021 03:47:33 UTC
+record: -1
+post_submission_on_open: true

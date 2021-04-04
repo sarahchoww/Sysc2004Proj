@@ -1,0 +1,6 @@
+I am: Jim
+I am: Kevin
+/I like to: Count Seconds
+I am: Jeanine
+/I like to: Ski
+I am: Maurice

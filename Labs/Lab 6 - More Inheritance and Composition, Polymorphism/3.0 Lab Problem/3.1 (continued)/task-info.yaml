@@ -1,0 +1,83 @@
+type: theory
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+          // ...
+       }
+    }
+  learner_created: false
+- name: src/Post.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class Post {
+
+    }
+  learner_created: false
+- name: src/MessagePost.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class MessagePost {
+
+    }
+  learner_created: false
+- name: src/VideoPost.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class VideoPost {
+
+    }
+  learner_created: false
+- name: src/PostWall.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class PostWall {
+
+    }
+  learner_created: false
+- name: src/PollPost.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class PollPost extends Post {
+
+    }
+  learner_created: false
+- name: src/StringIntPair.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class StringIntPair {
+        public final String s;
+        public final int i;
+
+        public StringIntPair(String s, int i) {
+            this.s = s;
+            this.i = i;
+        }
+    }
+  learner_created: false
+- name: src/Comment.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class Comment {
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1
+post_submission_on_open: true

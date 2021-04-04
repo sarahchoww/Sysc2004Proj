@@ -1,0 +1,64 @@
+type: theory
+files:
+- name: src/Main.java
+  visible: true
+  placeholders:
+  - offset: 1
+    length: 25
+    placeholder_text: // make import here
+    initial_state:
+      length: 19
+      offset: 0
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: import java.util.Scanner;
+  - offset: 93
+    length: 43
+    placeholder_text: // create new Scanner object here
+    initial_state:
+      length: 33
+      offset: 92
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: Scanner sc = new Scanner(System.in);
+  - offset: 143
+    length: 25
+    placeholder_text: // store the entered line here
+    initial_state:
+      length: 30
+      offset: 133
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: String line = sc.nextLine();
+  - offset: 176
+    length: 22
+    placeholder_text: // echo it back to the console here
+    initial_state:
+      length: 35
+      offset: 171
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: System.out.println("echo >>> " + line);
+  text: |-
+    // make import here
+
+    public class Main {
+       public static void main(String[] args) {
+
+          // create new Scanner object here
+
+          // store the entered line here
+
+          // echo it back to the console here
+       }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  time: Wed, 17 Feb 2021 18:51:37 UTC
+record: -1
+post_submission_on_open: true

@@ -1,0 +1,75 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: <code>public void aMethod(String customActivity)</code>
+  is_correct: true
+- text: <code>public String aMethod(String customActivity)</code>
+  is_correct: true
+- text: <code>public void aMethod(String customActivity, int rank)</code>
+  is_correct: true
+- text: <code>public String aMethod()</code>
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+
+          Parent[] parentArray = {
+                  new Parent("Jim"),
+                  new Child("Kevin", "Count Seconds"),
+                  new Child("Jeanine", "Ski"),
+                  new Parent("Maurice")};
+
+          for (Parent p : parentArray) {
+             p.aMethod();
+          }
+       }
+    }
+  learner_created: false
+- name: src/Child.java
+  visible: true
+  text: |
+    public class Child extends Parent {
+
+        private final String favouriteActivity;
+
+        public Child(String name, String activity) {
+            super(name);
+            favouriteActivity = activity;
+        }
+
+        public void aMethod() {
+            super.aMethod();
+            System.out.println("/I like to: " + favouriteActivity);
+        }
+    }
+  learner_created: false
+- name: src/Parent.java
+  visible: true
+  text: |
+    public class Parent {
+
+        private final String name;
+
+        public Parent(String name) {
+            this.name = name;
+        }
+
+        public void aMethod() {
+            System.out.println("I am: " + name);
+        }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 06 Mar 2021 00:18:34 UTC
+record: -1
+selected_options:
+- 0
+- 1
+- 2

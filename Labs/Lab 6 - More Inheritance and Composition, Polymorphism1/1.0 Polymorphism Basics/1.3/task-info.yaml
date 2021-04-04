@@ -1,0 +1,103 @@
+type: output
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+
+          Parent[] parentArray = {
+                  new Parent("Jim"),
+                  new Child("Kevin", "Count Seconds"),
+                  new Child("Jeanine", "Ski"),
+                  new Parent("Maurice")};
+
+          for (Parent p : parentArray) {
+             p.aMethod();
+          }
+       }
+    }
+  learner_created: false
+- name: test/output.txt
+  visible: false
+  text: |
+    I am: Jim
+    I am: Kevin
+    /I like to: Count Seconds
+    I am: Jeanine
+    /I like to: Ski
+    I am: Maurice
+  learner_created: false
+- name: src/Child.java
+  visible: true
+  placeholders:
+  - offset: 291
+    length: 10
+    placeholder_text: /* TODO */
+    initial_state:
+      length: 10
+      offset: 139
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: |-
+      super(name);
+              favouriteActivity = activity;
+  - offset: 345
+    length: 10
+    placeholder_text: /* TODO */
+    initial_state:
+      length: 10
+      offset: 193
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: |-
+      super.aMethod();
+              System.out.println("/I like to: " + favouriteActivity);
+  text: |
+    public class Child extends Parent {
+
+        private final String favouriteActivity;
+
+        public Child(String name, String activity) {
+            /* TODO */
+        }
+
+        public void aMethod() {
+            /* TODO */
+        }
+    }
+  learner_created: false
+- name: src/Parent.java
+  visible: true
+  placeholders:
+  - offset: 245
+    length: 10
+    placeholder_text: /* TODO */
+    initial_state:
+      length: 10
+      offset: 157
+    initialized_from_dependency: false
+    selected: false
+    status: Solved
+    encrypted_possible_answer: 'System.out.println("I am: " + name);'
+  text: |
+    public class Parent {
+
+        private final String name;
+
+        public Parent(String name) {
+            this.name = name;
+        }
+
+        public void aMethod() {
+            /* TODO */
+        }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 06 Mar 2021 02:40:06 UTC
+record: -1

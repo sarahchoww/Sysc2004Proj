@@ -1,0 +1,52 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: parent, parent, parent
+  is_correct: false
+- text: It will throw a TypeError because we did not include an @override in the Child
+    and Parent classes.
+  is_correct: false
+- text: parent, child, parent
+  is_correct: true
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Child.java
+  visible: true
+  text: |
+    public class Child extends Parent {
+        public void aMethod() {
+            System.out.println("child");
+        }
+    }
+  learner_created: false
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+
+          Parent[] parentArray = {new Parent(), new Child(), new Parent()};
+
+          for (Parent p : parentArray) {
+             p.aMethod();
+          }
+       }
+    }
+  learner_created: false
+- name: src/Parent.java
+  visible: true
+  text: |
+    public class Parent {
+        public void aMethod() {
+            System.out.println("parent");
+        }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 06 Mar 2021 02:38:17 UTC
+record: -1
+selected_options:
+- 2

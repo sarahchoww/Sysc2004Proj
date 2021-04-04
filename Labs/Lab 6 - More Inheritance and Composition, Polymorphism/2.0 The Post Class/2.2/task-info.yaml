@@ -1,0 +1,81 @@
+type: output
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+
+          Post p = new Post("Chris Mascarolls", "Deck the halls.");
+
+          for (int i = 0; i < 32; i++) {
+             p.react(0);
+          }
+
+          for (int i = 0; i < 13; i++) {
+             p.react(1);
+          }
+
+          p.react(2);
+
+          p.addComment(new Comment("Wanda Nauwittol", "What are your plans?!"));
+          p.addComment(new Comment("Jude Alkingtomie", "Yay!"));
+          p.addComment(new Comment("Grinch Grinch", "Nope!"));
+
+          p.display();
+       }
+    }
+  learner_created: false
+- name: test/output.txt
+  visible: false
+  text: |+
+    Chris Mascarolls on (DATE):
+    'Deck the halls.'
+    =)(32) =|(13) =((1) =O(0)
+    Comments:
+    -> 'What are your plans?!' - Wanda Nauwittol (DATE)
+    -> 'Yay!' - Jude Alkingtomie (DATE)
+    -> 'Nope!' - Grinch Grinch (DATE)
+
+  learner_created: false
+- name: src/Post.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class Post {
+
+        public void display() {
+
+            /*TODO*/
+
+            String s = String.format(
+                    "%s on (%s):\n" +
+                    "'%s'\n" +
+                    "=)(%d) =|(%d) =((%d) =O(%d)\n" +
+                    "Comments:\n" +
+                    "%s"
+                    , "", "", "", 0, 0, 0, 0, ""    // add the required values here
+            );
+            System.out.println(s);
+        }
+    }
+  learner_created: false
+- name: src/Comment.java
+  visible: true
+  learner_created: true
+status: Failed
+feedback:
+  message: Incorrect
+  time: Sat, 06 Mar 2021 02:26:36 UTC
+  expected: |+
+    Chris Mascarolls on (DATE):
+    'Deck the halls.'
+    =)(32) =|(13) =((1) =O(0)
+    Comments:
+    -> 'What are your plans?!' - Wanda Nauwittol (DATE)
+    -> 'Yay!' - Jude Alkingtomie (DATE)
+    -> 'Nope!' - Grinch Grinch (DATE)
+
+  actual: <no output>
+record: -1

@@ -1,0 +1,24 @@
+type: theory
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+          // create some Poly objects and test your PolyCalc.differentiate()/integrate() methods here!
+
+       }
+    }
+  learner_created: false
+- name: src/mymath/Poly.java
+  visible: true
+  learner_created: true
+- name: src/mymath/PolyCalc.java
+  visible: true
+  learner_created: true
+- name: src/mymath.zip
+  visible: true
+  learner_created: true
+status: Solved
+record: -1
+post_submission_on_open: true

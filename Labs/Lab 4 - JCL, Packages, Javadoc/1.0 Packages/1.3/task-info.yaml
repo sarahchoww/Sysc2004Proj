@@ -1,0 +1,61 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: A's method is protected; it needs to be changed to public.
+  is_correct: true
+- text: 'Import A''s package: <code>import one.A;</code>'
+  is_correct: false
+- text: Move <code>Main.java</code> into the one package.
+  is_correct: true
+- text: There is nothing we can do.
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    import one.A;
+
+    public class Main {
+       public static void main(String[] args) {
+
+          A a = new A();
+
+          // what's wrong here?
+          a.doSomething();
+       }
+    }
+  learner_created: false
+- name: src/one/A.java
+  visible: true
+  text: |
+    package one;
+
+    public class A {
+
+        protected void doSomething() {
+            System.out.println("I Am A");
+        }
+    }
+  learner_created: false
+- name: src/one/B.java
+  visible: true
+  text: |
+    package one;
+
+    public class B {
+
+        protected void doSomething() {
+            System.out.println("I Am B");
+        }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 17 Feb 2021 18:42:01 UTC
+record: -1
+selected_options:
+- 0
+- 2

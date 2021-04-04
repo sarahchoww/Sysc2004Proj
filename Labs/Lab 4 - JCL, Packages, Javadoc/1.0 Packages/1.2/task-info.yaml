@@ -1,0 +1,57 @@
+type: choice
+is_multiple_choice: true
+options:
+- text: A's method is <code>protected</code>; it needs to be changed to <code>public</code>.
+  is_correct: false
+- text: 'Import A''s package: <code>import one.A;</code>'
+  is_correct: true
+- text: Move <code>Main.java</code> into the one package.
+  is_correct: true
+- text: There is nothing we can do.
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/one/B.java
+  visible: true
+  text: |
+    package one;
+
+    public class B {
+
+        protected void doSomething() {
+            System.out.println("I Am B");
+        }
+    }
+  learner_created: false
+- name: src/one/A.java
+  visible: true
+  text: |
+    package one;
+
+    public class A {
+
+        protected void doSomething() {
+            System.out.println("I Am A");
+        }
+    }
+  learner_created: false
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+
+          // what's wrong here?
+          A a = new A();
+       }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 17 Feb 2021 18:41:17 UTC
+record: -1
+selected_options:
+- 1
+- 2

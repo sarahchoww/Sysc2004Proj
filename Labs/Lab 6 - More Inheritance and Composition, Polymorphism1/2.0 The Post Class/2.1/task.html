@@ -1,0 +1,66 @@
+<html>
+<head>
+    <style type ="text/css">
+       .footer{
+           position: fixed;
+           text-align: left;
+           line-height: 1.5;
+           bottom: 0px;
+           left: 5px;
+           width: 100%;
+       }
+        </style>
+    <style type ="text/css">
+       .body {
+           padding-bottom: 200px;
+       }
+    </style>
+</head>
+<body>
+<div class="body">
+    <h1>Lab 6 - More Inheritance and Composition, Polymorphism</h1>
+    <p>Authors: <strong>Martin Klamrowski</strong>, <strong>Cristina Ruiz Martin</strong></p>
+    <p>Relevant textbook reading - <strong>Chapter 7</strong> (The Object Oriented Thought Process)</p>
+    <h3>~2.0 The Post Class~</h3>
+    <p>
+        In this section you will be building the Post class that will form the basis of this lab's Lab Problem.
+    </p>
+    <h3>~Task 2.1~</h3>
+    <p>
+        The Post class models a post that you might see on a social media website. There will be a number of different
+        types of posts (PollPost, VideoPost, MessagePost) which will all derive their basic behaviour from
+        the Post class. These posts can be added to the PostWall for public viewing.
+    </p>
+    <p>
+        A Post should have an <code>author</code>, <code>time</code>, <code>content</code>, a list of
+        <code>reactions</code>, and a list of <code>comments</code>.
+    </p>
+    <p>
+        A Post should have a single constructor that takes in the <code>author</code> and <code>content</code> and
+        initializes the other fields to some default values (empty list, 0, empty string, etc.). <code>time</code>
+        should be set to the current time (it never changes). For help on this consult:
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html#getTime--">Oracle Docs: Calendar</a>.
+
+    </p>
+    <p>
+        <code>reactions</code> must keep track of the "reactions" users have to a post. These are limited to all of the
+        basic human emotions, namely: =), =|, =(, =O -
+        there are only
+        four possible reactions. You can copy these emojis into your code.
+    </p>
+    <p>
+        As you may have realized, <code>comments</code> will be Comments. To avoid errors for now, you will need to
+        create a Comment class. A Comment should have an <code>author</code>, <code>content</code>, and a
+        <code>time</code>.
+    </p>
+</div>
+
+</body>
+<!--<div class="footer">-->
+<!--    <p>-->
+<!--        <strong>Question:</strong> What would happen if you removed <code>aMethod()</code> from the Child class and ran-->
+<!--        the code again?-->
+<!--    </p>-->
+<!--</div>-->
+
+</html>

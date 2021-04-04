@@ -1,0 +1,23 @@
+type: theory
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+          // ...
+       }
+    }
+  learner_created: false
+- name: src/Post.java
+  visible: true
+  text: |
+    // STUDENT NAME
+    // STUDENT NUMBER
+    public class Post {
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1
+post_submission_on_open: true

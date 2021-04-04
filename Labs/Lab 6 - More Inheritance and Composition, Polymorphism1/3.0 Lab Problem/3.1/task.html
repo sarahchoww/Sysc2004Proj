@@ -1,0 +1,108 @@
+<html>
+<head>
+    <style type ="text/css">
+        .footer {
+            position: fixed;
+            text-align: left;
+            bottom: 0px;
+            left: 5px;
+            width: 100%;
+        }
+    </style>
+    <style type ="text/css">
+       .body {
+            padding-bottom: 50px;
+       }
+    </style>
+    <style>
+       .preamble {
+            border: 5px rgb(255, 0, 0) dashed;
+            padding: 5px;
+            display: block;
+       }
+    </style>
+</head>
+<body>
+<div class="body">
+    <h1>Lab 6 - More Inheritance and Composition, Polymorphism</h1>
+    <p>Authors: <strong>Martin Klamrowski</strong>, <strong>Cristina Ruiz Martin</strong></p>
+    <p>Relevant textbook reading - <strong>Chapter 7</strong> (The Object Oriented Thought Process)</p>
+    <h3>~3.0 Lab Problem~</h3>
+    <div class="preamble">
+        <p>
+            You must submit your solution to this problem on CuLearn.
+            <strong>
+                YOU MUST INCLUDE YOUR FULL NAME AND STUDENT NUMBER IN COMMENTS AT THE
+                HEAD OF EVERY FILE YOU SUBMIT
+            </strong>.
+        </p>
+        <p>
+            Submit <strong><u><i>ONLY</i></u></strong> the files specified at the end of this big red box. The files
+            and code within should be completed according to the specifications made <i>throughout</i> the Lab, and only
+            the final versions should be submitted. I.e., if Task 55.23 tells you to add accessor methods to MyClass,
+            you are required to include that code if MyClass needs to be submitted as part of the solution to the
+            Lab Problem (<strong>unless</strong> a later Task or the Lab Problem state otherwise).
+        </p>
+        <p>
+            Do not include redundant methods. Do not include methods that are not asked for or necessary. Some Lab
+            Problems will not explicitly state you need accessor methods, but these methods may be necessary.
+        </p>
+        <p>
+            Now that you have learned how to document code, you need to document your classes for full marks!
+            <strong>This is applicable from Lab 4 until the end of the course.</strong>
+        </p>
+        <p>
+            If you choose to complete the problem in this environment, the files can be
+            retrieved by right-clicking '3.0 Lab Problem'>Show in Files/Explorer.
+        </p>
+        <p>
+            Submit <strong>Post.java</strong>, <strong>PostWall.java</strong>, <strong>VideoPost.java</strong>,
+            <strong>PollPost.java</strong>,
+            <strong>MessagePost.java</strong>, <strong>Comment.java</strong>
+            when you are done.
+        </p>
+    </div>
+    <h3>~Problem 3.1~</h3>
+    <p>
+        In this problem you will be coding the PostWall class.
+    </p>
+    <p>
+        A PostWall object is composed of (or an aggregation of) many Post objects. These Post objects should be arranged
+        in a vertical fashion, separated by a divider.
+    </p>
+    <p>
+        PostWall has some methods:
+    </p>
+    <ul>
+        <li>
+            <code>generate()</code>
+            <ul>
+                <li>
+                    This method should generate the current "wall" made up of all the posts contained in the PostWall
+                    object.
+                </li>
+                <li>
+                    It should be printed out vertically, by calling each Post's <code>display()</code> method. Posts
+                    should be separated by a divider.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <code>addPost()</code>
+            <ul>
+                <li>
+                    This method must take a Post object and add it to the PostWall's list of Posts.
+                </li>
+                <li>
+                    Remember, a post can be any of the above Post subtypes (VideoPost, MessagePost, PollPost).
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+<!--<div class="footer">-->
+<!--    &lt;!&ndash;<strong>You can run your code here.</strong>&ndash;&gt;-->
+<!--</div>-->
+
+</html>

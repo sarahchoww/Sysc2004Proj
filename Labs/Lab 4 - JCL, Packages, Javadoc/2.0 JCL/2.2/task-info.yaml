@@ -1,0 +1,22 @@
+type: theory
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    // write a single import here
+
+
+    public class Main {
+       public static void main(String[] args) {
+
+          // fix these errors
+          Scanner sc = new Scanner(System.in);
+          ArrayList<String> list = new ArrayList<>();
+       }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  time: Wed, 17 Feb 2021 18:52:36 UTC
+record: -1
+post_submission_on_open: true

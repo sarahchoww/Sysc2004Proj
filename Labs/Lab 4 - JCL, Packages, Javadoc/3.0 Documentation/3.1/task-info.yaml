@@ -1,0 +1,163 @@
+type: theory
+files:
+- name: src/Dog.java
+  visible: true
+  placeholders:
+  - offset: 0
+    length: 65
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 0
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+       * @author  Your Name
+       * @version 0.0
+       */
+  - offset: 90
+    length: 58
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 25
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * The Dog's age.
+           */
+  - offset: 175
+    length: 58
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 52
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * The Dog's name.
+           */
+  - offset: 264
+    length: 59
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 83
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * The Dog's breed.
+           */
+  - offset: 355
+    length: 68
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 115
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * The frequency in (Hz) of the Dog's tail wagging.
+           */
+  - offset: 470
+    length: 103
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 162
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * The frequency in (Hz) required for flight.
+           */
+  - offset: 640
+    length: 128
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 229
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * Constructor for Dog.
+           *
+           * @param age   int value for the Dog's age
+           * @param name  String for the Dog's name
+           * @param breed String for the Dog's breed
+           */
+  - offset: 911
+    length: 61
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 372
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * Increment the Dog's age by 1.
+           */
+  - offset: 1032
+    length: 84
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 432
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * Get's the Dog's age in "dog years".
+           *
+           * @return  int value of the Dog's age multiplied by 7
+           */
+  - offset: 1186
+    length: 116
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 502
+    initialized_from_dependency: false
+    selected: true
+    status: Solved
+    encrypted_possible_answer: |-
+      /**
+           * Accept treats and increase tail frequency accordingly.
+           *
+           * @param numberOfTreats    an int representing how many treats are accepted
+           * @return                  boolean value; true if THRESHOLD_FOR_FLIGHT exceeded, otherwise false
+           */
+  text: "\npublic class Dog {\n\n    \n    private int age;\n\n    \n    private String\
+    \ name;\n\n    \n    private String breed;\n\n    \n    private double tailWagFrequency\
+    \ = 1;\n\n    \n    private static final double THRESHOLD_FOR_FLIGHT = 50.0;\n\
+    \n    \n    public Dog(int age, String name, String breed) {\n        this.age\
+    \ = age;\n        this.name = name;\n        this.breed = breed;\n    }\n\n  \
+    \  \n    public void haveBirthday() {\n        age++;\n    }\n\n    \n    public\
+    \ int getAgeInDogYears() {\n        return age*7;\n    }\n\n    \n    public boolean\
+    \ acceptTreat(int numberOfTreats) {\n        tailWagFrequency = tailWagFrequency\
+    \ + (250.0 - Math.exp(0.5 * numberOfTreats)) / Math.exp(0.5 * numberOfTreats);\n\
+    \n        if (tailWagFrequency > THRESHOLD_FOR_FLIGHT) return true;\n        return\
+    \ false;\n    }\n}\n"
+  learner_created: false
+- name: src/quickdocs.png
+  visible: false
+  learner_created: false
+status: Solved
+record: -1
+post_submission_on_open: true

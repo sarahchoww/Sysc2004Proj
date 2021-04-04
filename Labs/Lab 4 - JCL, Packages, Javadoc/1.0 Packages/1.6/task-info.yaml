@@ -1,0 +1,30 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: one.
+  is_correct: false
+- text: two.
+  is_correct: false
+- text: The default package (package with no name).
+  is_correct: true
+- text: main.
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/Main.java
+  visible: true
+  text: |-
+    public class Main {
+       public static void main(String[] args) {
+          // you can test here
+       }
+    }
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 17 Feb 2021 18:45:51 UTC
+record: -1
+selected_options:
+- 2

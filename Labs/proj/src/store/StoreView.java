@@ -160,8 +160,6 @@ public class StoreView {
      */
     private JButton checkoutButton(ShoppingCart cart) {
         JButton button = new JButton("Checkout");
-        ArrayList<Integer[]> newItemsInCart = new ArrayList<>();
-        newItemsInCart.add(null);
 
         button.setPreferredSize(new Dimension(150, 30));
         button.addActionListener(new ActionListener() {
@@ -179,6 +177,8 @@ public class StoreView {
                 enableButtons(3);
                 enableButtons(4);
 
+                ArrayList<Integer[]> newItemsInCart = new ArrayList<>();
+                newItemsInCart.add(null);
                 cart.setItemsInCart(newItemsInCart); // Once the user checkouts, their cart is reset
             }
         });

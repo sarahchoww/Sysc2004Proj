@@ -3,9 +3,9 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 2.0
+ * @version 3.0
  * <p>
- * SYSC 2004 Project - Milestone 2 Store View class
+ * SYSC 2004 Project - Milestone 4 Store View class
  * <p>
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -44,11 +44,9 @@ public class StoreView {
     private JLabel[] productLabels;
     private JButton[][] upDown;
 
-    private final int NUMOFPRODUCTS = 5; // 4 product, nothing in index 0
-
 
     /**
-     * Parametric constructor for a StoreView
+     * Constructor for Storeview.
      *
      * @param storeManager StoreManager, Store View's store manager
      * @param cartID       int, cartID for the Store View
@@ -60,13 +58,17 @@ public class StoreView {
         this.maxStock = new Integer[]{null, 10, 10, 10, 10};
     }
 
-
+    /**
+     * Method that sets the + button for the products.
+     * @param productID represents the productID of the product to be incremented, int
+     * @param cart represents the cart object, ShoppingCart
+     * @return the button object, JButton
+     */
     private JButton getUp(int productID, ShoppingCart cart) {
         JButton button = new JButton("+");
 
         button.setPreferredSize(new Dimension(100, 30));
         button.addActionListener(new ActionListener() {
-
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -78,6 +80,12 @@ public class StoreView {
         return button;
     }
 
+    /**
+     * Method that sets the - button for the products
+     * @param productID represents the productID of the product to be decremented, int
+     * @param cart represents the cart object, ShoppingCart
+     * @return the button object, JButton
+     */
     private JButton getDown(int productID, ShoppingCart cart) {
         JButton button = new JButton("-");
         button.setEnabled(false);
@@ -96,7 +104,10 @@ public class StoreView {
         return button;
     }
 
-
+    /**
+     * Method that enables and disables the + and - buttons based on the stock value.
+     * @param productID represents the productID of the product, int
+     */
     private void enableButtons(int productID){
         final int UP = 0;
         final int DOWN = 1;
@@ -117,6 +128,11 @@ public class StoreView {
         }
     }
 
+    /**
+     * Method to set the view cart button.
+     * @param cart the cart object, Shopping Cart
+     * @return the button object, JButton
+     */
     private JButton viewCartButton(ShoppingCart cart) {
         JButton button = new JButton("View Cart");
 
@@ -137,16 +153,18 @@ public class StoreView {
         return button;
     }
 
+    /**
+     * Method to set the checkout button. Checks if buttons should be enabled or disabled and resets the cart.
+     * @param cart the cart object, ShoppingCart
+     * @return a button object, JButton
+     */
     private JButton checkoutButton(ShoppingCart cart) {
         JButton button = new JButton("Checkout");
         ArrayList<Integer[]> newItemsInCart = new ArrayList<>();
-
         newItemsInCart.add(null);
 
         button.setPreferredSize(new Dimension(150, 30));
-
         button.addActionListener(new ActionListener() {
-
 
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -167,6 +185,11 @@ public class StoreView {
         return button;
     }
 
+    /**
+     * Method to set the quit button. A message pop-up appears for a yes or no answer and the program closes if yes.
+     * @param cart the cart object, ShoppingCart
+     * @return a button object, JButton
+     */
     private JButton quitButton(ShoppingCart cart) {
         JButton button = new JButton("Quit");
 
@@ -186,7 +209,10 @@ public class StoreView {
         return button;
     }
 
-
+    /**
+     * Method to update the Stock(x) value in the GUI.
+     * @param productID represents the productID of the product, int
+     */
     private void updateProductLabel(int productID) {
         switch (productID) {
             case (1):
@@ -211,7 +237,12 @@ public class StoreView {
         }
     }
 
-    private void initializeGUI(ShoppingCart cart) {
+    /**
+     * Mehtod to build the GUI.
+     * @param cart the cart object, ShoppingCart
+     */
+    private void displayGUI(ShoppingCart cart) {
+        final int NUMOFPRODUCTS = 5; // 4 product, nothing in index 0
 
         frame.setTitle("M&S Music Store");
 
@@ -332,40 +363,17 @@ public class StoreView {
     }
 
     /**
-     * Returns whether or not there are any active users
-     *
-     * @param users ArrayList<StoreView>, arraylist of all users
-     * @return boolean  true if there are active users, false otherwise
-     */
-    private static boolean activeUsers(ArrayList<StoreView> users) {
-
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i) != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * This method displays the current items in the cart. It shows the quantity, product name, and unit price
-     * of the item.
-     *
-     * @param cart    ShoppingCart, represents the shopping cart object of the user
-
-     * @return boolean   represents whether the operation was successful
+     * This method returns a StringBuilder object with the cart / checkout details.
+     * @param cart the cart object, ShoppingCart
+     * @param command a String that is either "VIEWCART" or "CHECKOUT"
+     * @return
      */
     private StringBuilder printCart(ShoppingCart cart, String command) {
 
         StringBuilder output1 = new StringBuilder();
         StringBuilder output2 = new StringBuilder();
-        StringBuilder output3 = new StringBuilder();
-        StringBuilder output4 = new StringBuilder();
         output1.append("<html><table border='0'>");
         output2.append("<html><table border='0'>");
-        output3.append("<html><table border='0'>");
-        output4.append("<html><table border='0'>");
 
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         ArrayList<Integer[]> items = cart.getItemsInCart();
@@ -448,24 +456,21 @@ public class StoreView {
      *
      * @param cart      ShoppingCart, represents the user's shopping cart
      * @param productID int, represents the productID of the product to be added
-     * @param emptyCart boolean, represents whether the user is emptying the entire cart
      */
-    private void removeFromCart(ShoppingCart cart, int productID, boolean emptyCart) {
+    private void removeFromCart(ShoppingCart cart, int productID) {
         storeManager.removeFromCart(cart, productID);
-
-
     }
 
     /**
      * This methods calls on the StoreManager's checkout method.
-     * It checks out the products in the cart.
+     * It sets the new maxStock value in the store.
      *
-     * @param cart ShoppingCart, represents the user's cart
-     * @return void
+     * @param cart represents the user's cart, ShoppingCart
+     * @return the total value, double
      */
-    private int checkout(ShoppingCart cart) {
+    private double checkout(ShoppingCart cart) {
 
-        int total = storeManager.checkout(cart);
+        double total = storeManager.checkout(cart);
 
         for (int i = 1; i < 5; i++){
             this.maxStock[i] = storeManager.getInventory().getStock().get(i);
@@ -496,11 +501,10 @@ public class StoreView {
 
                 for(int i = 1; i < cart.getItemsInCart().size(); i++){
                     if (((cart.getItemsInCart().get(i)[0]) == productID) && (cart.getItemsInCart().get(i)[1]) > 0){
-                        removeFromCart(cart, productID, false);
+                        removeFromCart(cart, productID);
                         break;
                     }
                 }
-
                 break;
         default:
             break;
@@ -554,8 +558,7 @@ public class StoreView {
         shoppingCart.add(null); //first element is null so there's no offset
         shoppingCart.add(new ShoppingCart(sv1.cartID));
 
-        sv1.initializeGUI(shoppingCart.get(sv1.cartID));
-
+        sv1.displayGUI(shoppingCart.get(sv1.cartID));
 
     }
 }

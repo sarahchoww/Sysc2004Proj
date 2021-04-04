@@ -3,9 +3,9 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 2.0
+ * @version 3.0
  *
- * SYSC 2004 Project - Milestone 2 Shopping Cart Class
+ * SYSC 2004 Project - Milestone 4 Shopping Cart Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -95,6 +95,10 @@ public class ShoppingCart {
         return false;
     }
 
+    /**
+     * Setter method to set the itemsInCart attribute.
+     * @param itemsInCart represents the new itemsInCart, ArrayList<Integer[]>
+     */
     public void setItemsInCart(ArrayList<Integer[]> itemsInCart) {
         this.itemsInCart = itemsInCart;
     }

@@ -3,9 +3,9 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 3.0
+ * @version 4.0
  *
- * SYSC 2004 Project - Milestone 2 Store Manager Class
+ * SYSC 2004 Project - Milestone 4 Store Manager Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -89,12 +89,12 @@ public class StoreManager {
     }
 
     /**
-     * Prints user's receipt at checkout for their given Shopping Cart
+     * Method to calculate the total.
      *
-     * @param cart      ShoppingCart, user's cart that is being checked out
-     * @return void
+     * @param cart user's cart that is being checked out, ShoppingCart
+     * @return the total, double
      */
-    public int checkout (ShoppingCart cart) {
+    public double checkout (ShoppingCart cart) {
 
         ArrayList<Integer[]> items = cart.getItemsInCart();
 
@@ -116,7 +116,7 @@ public class StoreManager {
                 total += this.inventory.getProduct(productID).getPrice() * quantity;
             }
         }
-        return ((int)total);
+        return (total);
     }
 
     /**

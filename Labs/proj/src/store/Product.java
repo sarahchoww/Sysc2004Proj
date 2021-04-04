@@ -5,7 +5,7 @@
  * @author Sarah Chow, 101143033
  * @version 3.0
  *
- * SYSC 2004 Project - Milestone 2 Product Class
+ * SYSC 2004 Project - Milestone 4 Product Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.

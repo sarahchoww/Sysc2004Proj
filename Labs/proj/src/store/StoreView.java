@@ -530,8 +530,6 @@ public class StoreView {
      */
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
         StoreManager sm = new StoreManager();
 
         //Initialize products

@@ -94,4 +94,8 @@ public class ShoppingCart {
 
         return false;
     }
+
+    public void setItemsInCart(ArrayList<Integer[]> itemsInCart) {
+        this.itemsInCart = itemsInCart;
+    }
 }

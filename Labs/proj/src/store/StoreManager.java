@@ -94,7 +94,7 @@ public class StoreManager {
      * @param cart      ShoppingCart, user's cart that is being checked out
      * @return void
      */
-    public void checkout (ShoppingCart cart) {
+    public int checkout (ShoppingCart cart) {
 
         ArrayList<Integer[]> items = cart.getItemsInCart();
 
@@ -107,27 +107,16 @@ public class StoreManager {
         int productID;
         int quantity;
 
-        System.out.println("|-------------RECEIPT-------------|");
-        System.out.println("Quantity | Product Name |    PRICE");
-
 
         for (int i = 1; i < items.size(); i++){
             productID = items.get(i)[ID_INDEX]; // Get product ID in item array
             quantity = items.get(i)[QUANTITY_INDEX]; // Get quantity in item array
 
             if (quantity > 0){
-                System.out.printf("%8s %14s %10s%n", items.get(i)[QUANTITY_INDEX],
-                        getInventory().getProduct(items.get(i)[ID_INDEX]).getName(),
-                        (getInventory().getProduct(items.get(i)[ID_INDEX]).getPrice()) *
-                                (items.get(i)[QUANTITY_INDEX]));
-
                 total += this.inventory.getProduct(productID).getPrice() * quantity;
             }
         }
-        System.out.println("-----------------------------------");
-
-        System.out.printf("Total: $%.2f%n%n", total);
-
+        return ((int)total);
     }
 
     /**

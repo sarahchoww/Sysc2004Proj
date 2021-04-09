@@ -78,26 +78,13 @@ public class Inventory implements ProductStockContainer {
 
     /**
      * Returns amount of stock of a product.
-     * Returns error code if product is not in inventory
      *
      * @param p product object
      * @return int of product quantity
      */
     @Override
     public int getProductQuantity(Product p){
-        int stockVal;
-        final int ERROR = -1;
-
-        int productID = p.getProductID();
-
-        try{
-            stockVal = this.stock.get(productID);
-        }
-        catch(Exception e){
-            System.out.println("Item does not exist in stock.");
-            return ERROR;
-        }
-        return stockVal;
+        return this.stock.get(p.getProductID());
     }
 
 
@@ -140,8 +127,8 @@ public class Inventory implements ProductStockContainer {
     /**
      * Removes stock for a given product
      *
-     * @param p
-     * @param quantity
+     * @param p product object
+     * @param quantity amount being removed for product
      */
     public void removeProductQuantity(Product p, int quantity){
         int count = 1;

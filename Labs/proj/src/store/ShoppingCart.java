@@ -45,6 +45,11 @@ public class ShoppingCart implements ProductStockContainer {
         return this.itemsInCart;
     }
 
+    /**
+     * Method to get number of products in cart.
+     * @return number of products in cart, int
+     */
+    @Override
     public int getNumOfProducts(){
         return getItemsInCart().size();
     }
@@ -64,6 +69,7 @@ public class ShoppingCart implements ProductStockContainer {
      * @param p product object
      * @return quantity of product
      */
+    @Override
     public int getProductQuantity(Product p){
         return itemsInCart.get(p.getProductID())[1];
     }
@@ -73,6 +79,7 @@ public class ShoppingCart implements ProductStockContainer {
      * @param p the product object
      * @param quantity quantity to be added
      */
+    @Override
     public void addProductQuantity(Product p, int quantity){
 
         for (int i  = 1; i < itemsInCart.size(); i++){
@@ -93,6 +100,7 @@ public class ShoppingCart implements ProductStockContainer {
      * @param p product object
      * @param quantity that should be removed
      */
+    @Override
     public void removeProductQuantity(Product p, int quantity){
 
         for (int i  = 1; i < itemsInCart.size(); i++){

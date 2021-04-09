@@ -3,9 +3,9 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 3.0
+ * @version 4.0
  *
- * SYSC 2004 Project - Milestone 4 Inventory Class
+ * SYSC 2004 Project - Milestone 5 Inventory Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * the stock of each product
  */
 
-public class Inventory {
+public class Inventory implements ProductStockContainer {
     //Beginning of inventory class
 
     private ArrayList<Integer> stock = new ArrayList<>();
@@ -78,14 +78,17 @@ public class Inventory {
 
     /**
      * Returns amount of stock of a product.
-     * Returns error code if product is not in inven tory
+     * Returns error code if product is not in inventory
      *
-     * @param productID     int, productID being used to search for a product
-     * @return int          returns quantity of stock of given product
+     * @param p product object
+     * @return int of product quantity
      */
-    public int getStock(int productID){
+    @Override
+    public int getProductQuantity(Product p){
         int stockVal;
         final int ERROR = -1;
+
+        int productID = p.getProductID();
 
         try{
             stockVal = this.stock.get(productID);
@@ -99,17 +102,16 @@ public class Inventory {
 
 
     /**
-     * Function overloading - to set stock of existing product
-     *
-     * @param productID     int, productID being used to search for a product
-     * @param stock         int, amount of stock being set for product
-     * @return void
+     * Method to set stock of existing product
+     * @param p product object
+     * @param quantity amount of stock being set for product
      */
-    public void setStock(int stock, int productID){
+    @Override
+    public void addProductQuantity(Product p, int quantity){
 
-        int newStock = this.getStock(productID) + stock;
+        int newStock = this.getProductQuantity(p) + quantity;
 
-        this.stock.set(productID, newStock);
+        this.stock.set(p.getProductID(), newStock);
 
     }
 
@@ -124,7 +126,7 @@ public class Inventory {
      */
     public void setStock(int stock, String name, int productID, double price){
         if (this.stock.size() > productID){
-            setStock(stock, productID);
+            addProductQuantity(products.get(productID), productID);
         }
         else{
             Product product = new Product(name, productID, price);
@@ -138,20 +140,19 @@ public class Inventory {
     /**
      * Removes stock for a given product
      *
-     * @param productID     int, productID being used to search for a product
-     * @param stock         int, amount of stock being removed for specific product
-     * @return void
+     * @param p
+     * @param quantity
      */
-    public void removeStock(int stock, int productID){
+    public void removeProductQuantity(Product p, int quantity){
         int count = 1;
 
         while (count < (products.size())){
 
-            if (getProduct(count).getProductID() == productID){
+            if (getProduct(count).getProductID() == p.getProductID()){
 
                 // Check to see if product will have remaining stock
-                if ((this.stock.get(count) - stock) > 0){
-                    this.stock.set(count, this.stock.get(count) - stock);
+                if ((this.stock.get(count) - quantity) > 0){
+                    this.stock.set(count, this.stock.get(count) - quantity);
                 }
                 else{
                     this.stock.set(count, 0);
@@ -159,5 +160,14 @@ public class Inventory {
             }
             count++;
         }
+    }
+
+    /**
+     * Method to get number of products.
+     *
+     * @return number of products, int
+     */
+    public int getNumOfProducts(){
+        return products.size();
     }
 }

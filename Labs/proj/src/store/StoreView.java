@@ -1,12 +1,12 @@
 /**
- * SYSC 2004 Winter 2021
+ *              SYSC 2004 Winter 2021
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 3.0
- * <p>
- * SYSC 2004 Project - Milestone 4 Store View class
- * <p>
+ * @version 4.0
+ *
+ * SYSC 2004 Project - Milestone 5 Store View class
+ *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
  */
@@ -121,6 +121,10 @@ public class StoreView {
             if (currentStock == maxStock[productID]){
                 upDown[productID][DOWN].setEnabled(false);
             }
+        }
+        else if (maxStock[productID] == 0){
+            upDown[productID][DOWN].setEnabled(false);
+            upDown[productID][UP].setEnabled(false);
         }
         else{
             upDown[productID][DOWN].setEnabled(true);
@@ -381,7 +385,7 @@ public class StoreView {
         boolean emptyCart = false;
         int counter = 1;
 
-        while ( !emptyCart && counter < cart.getItemsInCart().size()){
+        while ( !emptyCart && counter < cart.getNumOfProducts()){
             if (items.get(counter)[1] > 0) {
                 emptyCart = true;
             }
@@ -411,7 +415,7 @@ public class StoreView {
 
 
 
-        for (int i = 1; i < cart.getItemsInCart().size(); i++) {
+        for (int i = 1; i < cart.getNumOfProducts(); i++) {
             if (items.get(i)[1] > 0) {
 
                 output2.append("<tr><td align='center'>");

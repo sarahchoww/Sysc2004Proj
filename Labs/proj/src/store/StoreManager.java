@@ -3,9 +3,9 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 4.0
+ * @version 5.0
  *
- * SYSC 2004 Project - Milestone 4 Store Manager Class
+ * SYSC 2004 Project - Milestone 5 Store Manager Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -48,7 +48,7 @@ public class StoreManager {
      * @return int          quantity of stock of specific product
      */
     public int getStock (int productID) {
-        return this.inventory.getStock(productID);
+        return this.inventory.getProductQuantity(inventory.getProduct(productID));
     }
 
     /**
@@ -69,9 +69,9 @@ public class StoreManager {
      * @return void
      */
     public void addToCart(ShoppingCart cart, int productID){
-        if(cart.addProduct(productID)){
-            inventory.removeStock(1, productID);
-        }
+        // Quantity to be removed will always be 1
+        inventory.removeProductQuantity(inventory.getProduct(productID), 1);
+        cart.addProductQuantity(inventory.getProduct(productID), 1);
     }
 
     /**
@@ -83,9 +83,9 @@ public class StoreManager {
      * @return void
      */
     public void removeFromCart(ShoppingCart cart, int productID){
-        if (cart.removeProduct(productID)){
-            inventory.setStock(1, productID);
-        }
+        // Quantity to be added will always be 1
+        inventory.addProductQuantity(inventory.getProduct(productID), 1);
+        cart.removeProductQuantity(inventory.getProduct(productID), 1);
     }
 
     /**

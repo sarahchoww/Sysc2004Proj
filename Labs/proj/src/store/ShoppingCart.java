@@ -3,9 +3,9 @@
  *
  * @author Michael Whitford, 101151720
  * @author Sarah Chow, 101143033
- * @version 3.0
+ * @version 4.0
  *
- * SYSC 2004 Project - Milestone 4 Shopping Cart Class
+ * SYSC 2004 Project - Milestone 5 Shopping Cart Class
  *
  * Copyright © 2021 Michael Whitford & Sarah Chow.
  * All rights reserved.
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * A shopping cart
  */
-public class ShoppingCart {
+public class ShoppingCart implements ProductStockContainer {
 
     private int cartID;
 
@@ -45,6 +45,10 @@ public class ShoppingCart {
         return this.itemsInCart;
     }
 
+    public int getNumOfProducts(){
+        return getItemsInCart().size();
+    }
+
     /**
      * Mutator for cartID attribute
      *
@@ -56,43 +60,46 @@ public class ShoppingCart {
     }
 
     /**
-     * Adds product to cart if valid
-     *
-     * @param productID   int, productID of product to be added
-     * @return boolean    true if product could be added, false otherwise
+     * Method to get quantity of product
+     * @param p product object
+     * @return quantity of product
      */
-    public boolean addProduct(int productID){
-
-        for (int i  = 1; i < itemsInCart.size(); i++){
-            if (itemsInCart.get(i)[0] == productID){
-                itemsInCart.get(i)[1] ++; // If product is already added to cart, increment quantity
-                return true;
-            }
-        }
-
-        Integer[] newItem = {productID, 1};
-        itemsInCart.add(newItem); // If product does not exist in cart
-
-        return true;
+    public int getProductQuantity(Product p){
+        return itemsInCart.get(p.getProductID())[1];
     }
 
     /**
-     * Removes product from cart if valid
-     *
-     * @param productID   int, productID of product to be removed
-     * @return boolean    true if product could be removed, false otherwise
+     * Adds product to cart if valid
+     * @param p the product object
+     * @param quantity quantity to be added
      */
-    public boolean removeProduct(int productID){
+    public void addProductQuantity(Product p, int quantity){
 
         for (int i  = 1; i < itemsInCart.size(); i++){
-            if (itemsInCart.get(i)[0] == productID){
-                itemsInCart.get(i)[1] --; // If product is already added to cart, increment quantity
+            if (itemsInCart.get(i)[0] == p.getProductID()){
+                itemsInCart.get(i)[1] += quantity;
 
-                return true;
+                return;
             }
         }
 
-        return false;
+        Integer[] newItem = {p.getProductID(), quantity};
+        itemsInCart.add(newItem); // If product does not exist in cart
+    }
+
+
+    /**
+     * Removes product from cart if valid
+     * @param p product object
+     * @param quantity that should be removed
+     */
+    public void removeProductQuantity(Product p, int quantity){
+
+        for (int i  = 1; i < itemsInCart.size(); i++){
+            if (itemsInCart.get(i)[0] == p.getProductID()){
+                itemsInCart.get(i)[1] -= quantity;
+            }
+        }
     }
 
     /**

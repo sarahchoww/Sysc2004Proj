@@ -32,13 +32,33 @@ public class StoreManager {
         this.cartID.add(0, null);
     }
 
+
     /**
-     * Accessor for inventory attribute
+     * Accessor for inventory Product attribute
      *
-     * @return inventory     Inventory, inventory attribute for this class
+     * @return an ArrayList of Products, ArrayList<Product>
      */
-    public Inventory getInventory() {
-        return this.inventory;
+    public ArrayList<Product> getProducts(){
+        return this.inventory.getProducts();
+    }
+
+    /**
+     * Accessor for inventory Integer attribute
+     *
+     * @return an ArrayList of Integer, ArrayList<Integer>
+     */
+    public ArrayList<Integer> getStock(){
+        return this.inventory.getStock();
+    }
+
+    /**
+     * Accessor for inventory Product attribute
+     *
+     * @param productID representing the productID of the product, int
+     * @return a Product object, Product
+     */
+    public Product getProduct(int productID){
+        return this.inventory.getProduct(productID);
     }
 
     /**

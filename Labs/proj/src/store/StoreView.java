@@ -13,17 +13,11 @@
 
 package store;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.lang.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.NumberFormat;
 import java.util.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -202,9 +196,21 @@ public class StoreView {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                int productID;
+                int quantity;
 
                 if (JOptionPane.showConfirmDialog(null, "Close application?", "QUIT",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                    // Return items to cart
+                    for (int i = 1; i < cart.getItemsInCart().size(); i++){
+                        productID = cart.getItemsInCart().get(i)[0];
+                        quantity = cart.getItemsInCart().get(i)[1];
+
+                        for (int j = 0; j < quantity; j++){
+                            storeFunctions("REMOVEFROMCART", productID, cart);
+                        }
+                    }
                     System.exit(0);
                 }
             }
@@ -212,6 +218,7 @@ public class StoreView {
 
         return button;
     }
+
 
     /**
      * Method to update the Stock(x) value in the GUI.
@@ -242,7 +249,7 @@ public class StoreView {
     }
 
     /**
-     * Mehtod to build the GUI.
+     * Method to build the GUI.
      * @param cart the cart object, ShoppingCart
      */
     private void displayGUI(ShoppingCart cart) {
@@ -407,13 +414,9 @@ public class StoreView {
             output1.append("|---------------SHOPPING CART---------------|");
         }
 
-
-
         output2.append("<tr><td align='center'>Quantity ");
         output2.append("</td><td align='center'>| Product Name |");
         output2.append("</td><td align='center'> Unit Price");
-
-
 
         for (int i = 1; i < cart.getNumOfProducts(); i++) {
             if (items.get(i)[1] > 0) {
@@ -421,11 +424,10 @@ public class StoreView {
                 output2.append("<tr><td align='center'>");
                 output2.append(String.valueOf(items.get(i)[1]));
                 output2.append("</td><td align='center'>");
-                output2.append(storeManager.getInventory().getProduct(items.get(i)[0]).getName());
+                output2.append(storeManager.getProduct(items.get(i)[0]).getName());
                 output2.append("</td><td align='center'>");
-                output2.append(nf.format(storeManager.getInventory().getProduct(items.get(i)[0]).getPrice()));
+                output2.append(nf.format(storeManager.getProduct(items.get(i)[0]).getPrice()));
                 output2.append("</td></tr>");
-
             }
         }
 
@@ -477,7 +479,7 @@ public class StoreView {
         double total = storeManager.checkout(cart);
 
         for (int i = 1; i < 5; i++){
-            this.maxStock[i] = storeManager.getInventory().getStock().get(i);
+            this.maxStock[i] = storeManager.getStock().get(i);
         }
 
         return total;
@@ -496,7 +498,7 @@ public class StoreView {
         switch (choiceString) {
             case ("ADDTOCART"):
 
-                if (storeManager.getInventory().getStock().get(productID) > 0) {
+                if (storeManager.getStock().get(productID) > 0) {
                     addToCart(cart, productID);
                 }
                 break;
@@ -537,14 +539,14 @@ public class StoreView {
         StoreManager sm = new StoreManager();
 
         //Initialize products
-        sm.getInventory().getProducts().add(new Product("Guitar", 1, 999.99));
-        sm.getInventory().getStock().add(10);
-        sm.getInventory().getProducts().add(new Product("Piano", 2, 1999.99));
-        sm.getInventory().getStock().add(10);
-        sm.getInventory().getProducts().add(new Product("Flute", 3, 599.99));
-        sm.getInventory().getStock().add(10);
-        sm.getInventory().getProducts().add(new Product("Saxophone", 4, 799.99));
-        sm.getInventory().getStock().add(10);
+        sm.getProducts().add(new Product("Guitar", 1, 999.99));
+        sm.getStock().add(10);
+        sm.getProducts().add(new Product("Piano", 2, 1999.99));
+        sm.getStock().add(10);
+        sm.getProducts().add(new Product("Flute", 3, 599.99));
+        sm.getStock().add(10);
+        sm.getProducts().add(new Product("Saxophone", 4, 799.99));
+        sm.getStock().add(10);
 
 
         //First user
